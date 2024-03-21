@@ -1,0 +1,72 @@
+* {
+  border-width: 1px;
+  border-color: #000;
+  margin: 0;
+  padding: 0;
+  line-height: 2;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+body {
+  font-family: THSarabunNew, Tahoma, Loma, "Times New Roman", Times, serif;
+  color: #000;
+}
+.page {
+  position: relative;
+  display: block;
+  page-break-after: always;
+  background-color: #fff;
+  padding: 1cm;
+  margin: 1cm auto;
+  width: 21cm;
+  min-height: 29.7cm;
+}
+@page {
+  size: A4 portrait;
+  padding: 0;
+  margin: 1cm;
+}
+@media screen {
+  body {
+    background-color: #aaa;
+  }
+  a.icon-print {
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    position: fixed;
+    z-index: 1;
+    right: 20px;
+    top: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+    color: #333;
+    font-size: 30px;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+    border-radius: 50em;
+    -moz-border-radius: 50em;
+    -webkit-border-radius: 50em;
+  }
+  a.icon-print:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #000;
+  }
+  a.icon-print:before {
+    margin: 0;
+  }
+  .page {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  }
+}
+@media print {
+  a.icon-print {
+    display: none;
+  }
+  .page {
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -1,0 +1,62 @@
+.enroll_result .icon-loading,
+.enroll_result .icon-invalid,
+.enroll_result .icon-valid {
+  display: block;
+  margin-top: 10px;
+}
+.enroll_result .icon-loading:before,
+.enroll_result .icon-invalid:before,
+.enroll_result .icon-valid:before {
+  background-color: #fff;
+  border-radius: 50em;
+  -moz-border-radius: 50em;
+  -webkit-border-radius: 50em;
+  margin: 0;
+  display: inline-block;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+  border-width: 5px;
+  border-style: solid;
+}
+.enroll_result aside {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  display: block;
+  padding: 20px;
+  margin: 10px auto 20px;
+  width: 400px;
+  max-width: 95%;
+  background-color: #fff;
+  font-size: 1.5em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.enroll_result h1 {
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
+.enroll_result .result0 {
+  border-color: #4a5db9;
+  color: #4a5db9;
+}
+.enroll_result .icon-loading:before {
+  font-size: 1.5em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+}
+.enroll_result aside.result1 {
+  border-color: #117864;
+  color: #117864;
+}
+.enroll_result aside.result3 {
+  border-color: #f44336;
+  color: #f44336;
+}
+.enroll_result .icon-invalid:before,
+.enroll_result .icon-valid:before {
+  font-size: 2em;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+}

@@ -1,0 +1,183 @@
+body {
+  font-size: 10pt;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1.4em;
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+}
+thead th {
+  background-color: #DDD;
+  text-align: center;
+  font-weight: bold;
+}
+tbody th {
+  background-color: #eee;
+  font-weight: normal;
+}
+table,
+th,
+td,
+.border {
+  border-width: 1px;
+  border-color: #000;
+}
+td {
+  vertical-align: top;
+}
+td,
+th {
+  padding: 5px;
+}
+th.description {
+  width: 40%;
+}
+table.collapse td {
+  padding: 0;
+}
+td.stamp {
+  border-style: solid solid dotted none;
+  height: 100px;
+  position: relative;
+  text-align: center;
+}
+img.logo {
+  width: auto;
+  max-height: 9em;
+}
+img.signature,
+img.stamp {
+  width: auto;
+  height: 100px;
+}
+img.signature {
+  width: auto;
+  height: 50px;
+}
+.label {
+  background-color: #DDD;
+}
+.border {
+  border-style: solid;
+}
+th,
+.detail td {
+  border-right-style: solid;
+  border-bottom-style: solid;
+}
+th:nth-child(1),
+.detail td:nth-child(1),
+.border-all,
+.border-left {
+  border-left-style: solid;
+}
+tr:nth-child(1) th,
+.border-all,
+.border-top {
+  border-top-style: solid;
+}
+.border-bottom {
+  border-bottom-style: solid;
+}
+.border-top-bottom {
+  border-top-style: solid;
+  border-bottom-style: solid;
+}
+.underline {
+  border-bottom-style: double;
+  border-bottom-width: 3px;
+}
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.top {
+  vertical-align: top;
+}
+.bottom {
+  vertical-align: bottom;
+}
+.middle {
+  vertical-align: middle;
+}
+.fullwidth {
+  width: 100%;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.line1,
+.line2,
+.line3,
+.line4 {
+  margin: 0 0.5em;
+  border-bottom-style: dotted;
+  line-height: 1;
+}
+.line1,
+.line2,
+.line3 {
+  display: inline-block;
+}
+.line1 {
+  min-width: 5em;
+}
+.line2 {
+  min-width: 10em;
+}
+.line3 {
+  min-width: 15em;
+}
+.line {
+  text-decoration: underline dotted 1px;
+  text-underline-offset: 3px;
+  margin: 0 0.5em;
+}
+.line6 {
+  border-bottom-style: dotted;
+  line-height: 1;
+}
+ol {
+  padding: 0 0 0 20px;
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.blocknumber i {
+  width: 1.5em;
+  height: 1.5em;
+  border-color: #000;
+  border-style: solid solid solid none;
+  line-height: 1.5;
+  text-align: center;
+  font-style: normal;
+  display: inline-block;
+}
+.blocknumber i:first-child {
+  border-style: solid;
+}
+.checked {
+  font-size: 2em;
+  display: inline-block;
+  border: 1px solid #000;
+  width: 0.6em;
+  height: 0.6em;
+  line-height: 0.3em;
+  vertical-align: middle;
+  margin-left: 0.25em;
+}

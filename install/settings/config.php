@@ -1,0 +1,30 @@
+<?php
+/* config.php */
+return array(
+    'version' => '6.0.5',
+    'web_title' => 'โรงเรียน Enrollment',
+    'web_description' => 'ระบบสมัคร/ลงทะเบียน เข้าศึกษาต่อ',
+    'timezone' => 'Asia/Bangkok',
+    'enroll_w' => 600,
+    'enroll_csv_language' => 'UTF-8',
+    'enroll_study_plan_count' => 1,
+    'enroll_country' => 'TH',
+    'enroll_begin' => 0,
+    'enroll_end' => 0,
+    'enroll_editable' => array(0, 2),
+    'school_name' => 'โรงเรียน Enrollment',
+    'school_year' => date('Y') + 543,
+    'enroll_prefix' => 'E%s',
+    'enroll_no' => '%03d',
+    'skin' => 'skin/booking',
+    'header_bg_color' => '#769E51',
+    'warpper_bg_color' => '#D2D2D2',
+    'header_color' => '#FFFFFF',
+    'footer_color' => '#7E7E7E',
+    'logo_color' => '#000000',
+    'login_header_color' => '#000000',
+    'login_footer_color' => '#7E7E7E',
+    'login_color' => '#000000',
+    'login_bg_color' => '#D2D2D2',
+    'theme_width' => 'wide'
+);
