@@ -1,0 +1,89 @@
+/**
+ * modules/enroll/styles.css
+ * สไตล์เฉพาะของโมดูลรับสมัครนักเรียน
+ */
+
+/* หน้าสาธารณะ (สมัคร / ดูผล) ไม่มีเมนูด้านข้าง จัดกึ่งกลางแทน */
+.enroll-public {
+  max-width: 60em;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+/* คอลัมน์เลขประจำตัวผู้สมัคร: บาร์โค้ดอยู่บน เลขที่อยู่ล่าง */
+.enroll-barcode-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.enroll-barcode-cell img {
+  max-width: none;
+  height: 2.2em;
+}
+
+/* ผลการสมัคร */
+.enroll-result-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  align-items: flex-start;
+}
+
+.enroll-result-photo img {
+  width: 8em;
+  height: auto;
+  border-radius: var(--border-radius, 4px);
+}
+
+.enroll-result-detail {
+  flex: 1 1 20em;
+}
+
+.enroll-result-detail h2 {
+  margin: 0.2em 0 0.6em;
+}
+
+.enroll-barcode {
+  max-width: none;
+  height: 2.5em;
+}
+
+.enroll-result-detail dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.3em 1em;
+  margin: 0 0 1em;
+}
+
+.enroll-result-detail dt {
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.enroll-result-detail dd {
+  margin: 0;
+}
+
+.enroll-result-actions {
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.enroll-result-content {
+  margin-top: 2em;
+}
+
+@media (max-width: 40em) {
+  .enroll-result-detail dl {
+    grid-template-columns: 1fr;
+    gap: 0 0;
+  }
+
+  .enroll-result-detail dt {
+    margin-top: 0.5em;
+  }
+}

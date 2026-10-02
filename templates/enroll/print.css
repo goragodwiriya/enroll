@@ -1,0 +1,137 @@
+/**
+ * รูปแบบใบแจ้งความจำนงสำหรับพิมพ์
+ * โหลดเพิ่มจาก modules/export/views/print.css ผ่าน extra_head ของ printHtml()
+ */
+.enroll-sheet {
+  position: relative;
+  background: #fff;
+  color: #000;
+  padding: 1cm;
+  width: 21cm;
+  min-height: 29.7cm;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 2;
+  page-break-after: always;
+}
+
+.enroll-sheet table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.enroll-sheet td {
+  vertical-align: bottom;
+  padding: 0 2px;
+}
+
+.enroll-sheet td.top {
+  vertical-align: top;
+  white-space: nowrap;
+  padding-right: 10px;
+}
+
+.enroll-sheet .center {
+  text-align: center;
+}
+
+.enroll-sheet h1 {
+  font-size: 1.6em;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.enroll-sheet .head {
+  position: relative;
+}
+
+.enroll-sheet .head p {
+  margin: 0;
+}
+
+.enroll-sheet .barcode {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: none;
+}
+
+.enroll-sheet .logo {
+  height: 3em;
+  width: auto;
+}
+
+.enroll-sheet .photo-cell {
+  width: 3cm;
+  position: relative;
+}
+
+.enroll-sheet .photo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 11em;
+  width: auto;
+  object-fit: cover;
+}
+
+.enroll-sheet .section {
+  border-top: 2px solid #000;
+}
+
+.enroll-sheet .section-head {
+  padding-top: 10px;
+}
+
+.enroll-sheet .note {
+  margin-top: 10px;
+  border-top: 1px solid #000;
+}
+
+/* ช่องกรอกตัวเลขทีละหลัก */
+.enroll-sheet .blocknumber i {
+  display: inline-block;
+  width: 1.2em;
+  margin-right: 2px;
+  border: 1px solid #000;
+  font-style: normal;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* เส้นประให้เขียนด้วยลายมือ */
+.enroll-sheet .line1,
+.enroll-sheet .line3 {
+  display: inline-block;
+  border-bottom: 1px dotted #000;
+  min-width: 8em;
+  text-align: center;
+}
+
+.enroll-sheet .line3 {
+  min-width: 14em;
+}
+
+/* ช่องติ๊กถูก */
+.enroll-sheet .checked {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 1px solid #000;
+  vertical-align: middle;
+}
+
+@media screen {
+  .enroll-sheet {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+    margin: 1cm auto;
+  }
+}
+
+@media print {
+  .enroll-sheet {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}

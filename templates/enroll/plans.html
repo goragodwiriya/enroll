@@ -1,0 +1,44 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <form data-form="enrollPlans" action="api/enroll/plans/save" method="post" data-ajax-submit="true" data-load-api="api/enroll/plans/get"
+        data-load-query-params="true" data-on-load="initEnrollPlans" data-confirm="Confirm save" autocomplete="off">
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-category" data-i18n>{LNG_List of} {LNG_Study plan}</h1>
+            <p data-i18n>{LNG_Study plan} {LNG_of each education level}</p>
+          </div>
+        </header>
+        <div class="content-body">
+          <fieldset>
+            <div>
+              <label for="enroll_plan_level" data-i18n>{LNG_Education level}</label>
+              <span class="form-control icon-elearning">
+                <!-- เปลี่ยนระดับชั้น = เปลี่ยนหน้า (?level=) จัดการโดย initEnrollPlans ใน admin.js
+                     เพราะแผนการเรียนของแต่ละระดับเป็นคนละชุดกัน -->
+                <select id="enroll_plan_level" name="level" data-role="level" data-options-key="levels" data-attr="value:level"></select>
+              </span>
+            </div>
+          </fieldset>
+          <fieldset class="grid">
+            <div class="tablebody">
+              <table class="table border fullwidth" data-table="enrollPlans" data-editable-rows="true" data-attr="data:table" data-dynamic-columns="true">
+                <!-- คอลัมน์มาจาก API -->
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="comment" data-i18n>{LNG_A study plan that has been selected by an applicant cannot be deleted. Turn off Active to stop offering it.}</div>
+          </fieldset>
+          <fieldset class="submit">
+            <button type="submit" class="btn btn-primary icon-save" data-i18n>{LNG_Save}</button>
+          </fieldset>
+        </div>
+      </div>
+    </main>
+  </form>
+</div>
+<footer class="footer">
+  <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+</footer>

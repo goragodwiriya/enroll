@@ -1,0 +1,98 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-list" data-i18n>{LNG_List of} {LNG_Enroll}</h1>
+            <p data-i18n>{LNG_Applicants}</p>
+          </div>
+          <div>
+            <a class="btn btn-primary icon-register" href="/enroll-edit" data-i18n>{LNG_Registration form}</a>
+          </div>
+        </header>
+        <!-- จำนวนผู้สมัครแต่ละระดับ (ระบบเดิมเป็นการ์ดบนหน้าแรก) -->
+        <div data-component="api" data-endpoint="api/enroll/enrolls/summary" data-cache="true" data-cache-time="300000">
+          <div class="ggrid" data-for="level in data.levels">
+            <template>
+              <!-- ลูกค้าทั้งหมด -->
+              <a class="block3 large6 stat-card" data-attr="href:level.url">
+                <div class="stat-header icon-register">
+                  <div class="stat-title" data-text="level.topic"></div>
+                </div>
+                <div class="stat-value" data-text="level.count_text"></div>
+                <div class="stat-change" data-i18n>{LNG_Number of registrants}</div>
+              </a>
+            </template>
+          </div>
+        </div>
+        <div class="content-body">
+          <div class="tablebody">
+            <!-- ตัวกรองภายนอก: ชื่อ select ตรงกับชื่อพารามิเตอร์ที่ API อ่าน
+                 ตัวเลือกถูกเติมจาก filters ของ API เอง -->
+            <form data-table-filter="enrolls" class="table_nav">
+              <div>
+                <label for="filter_level" data-i18n>{LNG_Education level}</label>
+                <span class="form-control">
+                  <select id="filter_level" name="level"></select>
+                </span>
+              </div>
+              <div>
+                <label for="filter_result" data-i18n>{LNG_Academic result}</label>
+                <span class="form-control">
+                  <select id="filter_result" name="result"></select>
+                </span>
+              </div>
+              <div>
+                <label for="filter_plan" data-i18n>{LNG_Study plan}</label>
+                <span class="form-control">
+                  <select id="filter_plan" name="plan">
+                    <option value="" data-i18n>{LNG_all items}</option>
+                  </select>
+                </span>
+              </div>
+              <div>
+                <label for="filter_status" data-i18n>{LNG_Result}</label>
+                <span class="form-control">
+                  <select id="filter_status" name="status">
+                    <option value="" data-i18n>{LNG_all items}</option>
+                  </select>
+                </span>
+              </div>
+              <input type="search" name="search" placeholder="{LNG_Search}...">
+              <!-- ดาวน์โหลดตามตัวกรองที่ใช้อยู่ ลิงก์สร้างโดย initEnrollTable
+                   เพราะต้องเก็บค่าตัวกรองและการเรียงลำดับปัจจุบันไปด้วย -->
+              <button type="button" class="btn btn-warning icon-excel" data-role="export-csv" data-i18n>{LNG_Download} CSV</button>
+            </form>
+            <table class="table border fullwidth" data-table="enrolls" data-source="api/enroll/enrolls" data-default-sort="created_at desc" data-page-size="30"
+                   data-search-columns="name,enroll_no" data-show-checkbox="true" data-actions='{"delete":"Delete"}' data-action-url="api/enroll/enrolls/action"
+                   data-action-button="Process|btn-success" data-on-load="initEnrollTable">
+              <thead>
+                <tr>
+                  <th data-field="enroll_no" data-sort="enroll_no" data-formatter="formatEnrollBarcode" data-i18n>{LNG_Applicant ID}</th>
+                  <th data-field="created_at_text" data-sort="created_at" class="nowrap" data-cell-class="nowrap" data-i18n>{LNG_Date}</th>
+                  <th data-field="name" data-sort="name" class="nowrap" data-cell-class="nowrap" data-i18n>{LNG_Name}</th>
+                  <th data-field="academic_value" data-sort="academic_value" class="center" data-cell-class="center" data-i18n>{LNG_Academic result}</th>
+                  <!-- เปลี่ยนค่าแล้วบันทึกทันที จัดการโดย initEnrollTable -->
+                  <th data-field="result_plan" data-sort="result_plan" class="center" data-cell-class="center" data-cell-element="select" data-options-key="result_plan" data-i18n>
+                    {LNG_Study plan}</th>
+                  <th data-field="result_status" data-sort="result_status" class="center" data-cell-class="center" data-cell-element="select" data-options-key="result_status"
+                      data-i18n>{LNG_Result}</th>
+                  <th data-field="link" class="center" data-cell-class="center"
+                      data-template="<a class='btn btn-primary icon-print' target='_blank' href='${print_url}' title='{LNG_Print}'></a> <a class='btn btn-success icon-edit' href='${edit_url}' title='{LNG_Edit}'></a>"
+                      data-i18n></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

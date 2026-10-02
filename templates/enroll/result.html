@@ -1,0 +1,74 @@
+<div class="enroll-public">
+  <main class="content">
+    <!-- ฟอร์มเดียวทำสองหน้าที่: โหลดผลการสมัครจาก ?id=<link> และเป็นฟอร์มค้นหา
+         เมื่อยังไม่รู้ว่าเป็นใคร (FormManager ส่ง query string ต่อให้ API เอง) -->
+    <form data-form="enrollResult" action="api/enroll/result/lookup" method="post" data-ajax-submit="true" data-validate="true"
+          data-load-api="api/enroll/result/get" data-load-query-params="true" autocomplete="off">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-verfied" data-i18n>{LNG_Result} &amp; {LNG_Print}</h1>
+            <p data-text="name" data-i18n>{LNG_Check application results}</p>
+          </div>
+        </header>
+        <div class="content-body">
+
+          <div data-if="!found">
+            <fieldset>
+              <legend data-i18n>{LNG_Registered Information}</legend>
+              <div class="comment" data-i18n>{LNG_Enter your ID number and date of birth to check the results.}</div>
+              <div>
+                <label for="lookup_id_card" data-i18n>{LNG_Identification No.}</label>
+                <span class="form-control icon-profile">
+                  <input type="text" inputmode="numeric" id="lookup_id_card" name="id_card" maxlength="13" pattern="[0-9]{13}" required>
+                </span>
+              </div>
+              <div>
+                <label for="lookup_birthday" data-i18n>{LNG_Birthday}</label>
+                <span class="form-control icon-calendar">
+                  <input type="date" id="lookup_birthday" name="birthday" required>
+                </span>
+              </div>
+            </fieldset>
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary large icon-search" data-i18n>{LNG_Search}</button>
+            </fieldset>
+          </div>
+
+          <div class="enroll-result-card" data-if="found">
+            <div class="enroll-result-photo">
+              <img data-attr="src:picture" data-if="picture" alt="">
+            </div>
+            <div class="enroll-result-detail">
+              <img class="enroll-barcode" data-attr="src:barcode" alt="">
+              <h2 data-text="name"></h2>
+              <dl>
+                <dt data-i18n>{LNG_Applicant ID}</dt>
+                <dd data-text="enroll_no"></dd>
+                <dt data-i18n>{LNG_Date}</dt>
+                <dd data-text="created_at"></dd>
+                <dt data-i18n>{LNG_Education level}</dt>
+                <dd data-text="level"></dd>
+                <dt data-i18n>{LNG_Study plan}</dt>
+                <dd data-text="plan"></dd>
+                <dt data-i18n>{LNG_Phone}</dt>
+                <dd><a data-attr="href:phone_url" data-text="phone"></a></dd>
+                <dt data-i18n>{LNG_Result}</dt>
+                <dd><span data-class="status_class" data-text="result_status_text"></span></dd>
+              </dl>
+              <div class="enroll-result-actions">
+                <a class="btn btn-primary icon-print" target="_blank" data-attr="href:print_url" data-i18n>{LNG_Print}</a>
+                <a class="btn btn-success icon-edit" data-if="can_edit" data-attr="href:edit_url" data-i18n>{LNG_Edit}</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="enroll-result-content" data-html="content" data-if="content"></div>
+        </div>
+      </div>
+    </form>
+  </main>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>
