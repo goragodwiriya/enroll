@@ -1,0 +1,199 @@
+<!-- ใบสมัครของเจ้าหน้าที่ (/enroll?id=<link> จากตารางผู้สมัคร, /enroll = เพิ่มใบสมัครใหม่) — api/enroll/enroll
+     แยกจากหน้าที่ผู้สมัครกรอก (/enroll-edit, api/enroll/register) ใช้ช่องชุดเดียวกัน แต่ใช้กติกาของเจ้าหน้าที่:
+     ไม่ติดช่วงรับสมัคร จำนวนที่รับ และตัวกันสแปม ใบที่สถานะแก้ไขไม่ได้เปิดดูได้อย่างเดียว -->
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <form class="enroll-admin" data-form="enrollForm" action="api/enroll/enroll/save" method="post" data-ajax-submit="true" data-validate="true"
+            data-load-api="api/enroll/enroll/get" data-load-query-params="true" data-on-load="initEnrollForm"
+            enctype="multipart/form-data" autocomplete="off">
+        <div class="card-groups">
+          <header>
+            <div>
+              <h1 class="icon-register" data-i18n>{LNG_Registration form}</h1>
+              <p>
+                <span data-if="is_new" data-i18n>{LNG_Add application}</span>
+                <span data-if="!is_new"><span data-i18n>{LNG_Applicant ID}</span> <b data-text="enroll_no"></b> · <span data-text="created_at"></span></span>
+              </p>
+            </div>
+            <div>
+              <a class="btn icon-prev" data-attr="href:back_url" data-i18n>{LNG_Back}</a>
+              <a class="btn btn-primary icon-print" target="_blank" data-if="print_url" data-attr="href:print_url" data-i18n>{LNG_Print application form}</a>
+              <a class="btn btn-warning icon-barcode" target="_blank" data-if="card_url" data-attr="href:card_url" data-i18n>{LNG_Print admission card}</a>
+            </div>
+          </header>
+          <div class="content-body">
+
+            <!-- สถานะของใบสมัคร (เปลี่ยนผลได้ที่ตารางผู้สมัคร) -->
+            <div class="enroll-admin-status" data-if="!is_new">
+              <span class="enroll-status" data-class="status_class" data-text="result_status_text"></span>
+              <span class="enroll-review" data-if="review_text"><span data-i18n>{LNG_Needs review}</span>: <span data-text="review_text"></span></span>
+            </div>
+            <!-- สถานะที่ไม่อยู่ในรายการ "แก้ไขได้" (ตั้งค่าโมดูล) = ดูได้อย่างเดียว เหมือนระบบเดิม -->
+            <aside class="warning" data-if="!can_save" data-text="readonly_message"></aside>
+
+            <fieldset>
+              <legend data-i18n>{LNG_Enroll type}</legend>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_level" data-i18n>{LNG_Education level}</label>
+                  <span class="form-control icon-elearning">
+                    <select id="enroll_level" name="level" data-role="level" data-options-key="levels" data-attr="value:level" required></select>
+                  </span>
+                </div>
+              </div>
+              <!-- ช่องเลือกแผนการเรียนมีกี่ช่องขึ้นกับค่ากำหนด enroll_study_plan_count
+                   และเปลี่ยนตัวเลือกตามระดับชั้น จึงสร้างโดย buildEnrollFields -->
+              <div class="enroll-grid" data-role="plans"></div>
+            </fieldset>
+
+            <fieldset>
+              <legend data-i18n>{LNG_Registered Information}</legend>
+              <div class="form-group">
+                <div class="width20">
+                  <label for="enroll_title" data-i18n>{LNG_Prefix}</label>
+                  <span class="form-control">
+                    <select id="enroll_title" name="title" data-options-key="title" data-attr="value:title"></select>
+                  </span>
+                </div>
+                <div class="width80">
+                  <label for="enroll_name" data-i18n>{LNG_Name}</label>
+                  <span class="form-control icon-customer">
+                    <input type="text" id="enroll_name" name="name" maxlength="100" data-attr="value:name" required>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <label for="enroll_thumbnail" data-role="photo-label" data-i18n>{LNG_Picture of student}</label>
+                <span class="form-control icon-image">
+                  <input type="file" id="enroll_thumbnail" name="thumbnail" data-files="thumbnail" data-preview="true" accept="image/*">
+                </span>
+                <div class="comment" id="result_thumbnail" data-i18n>{LNG_Straight face photos Wearing a uniform, not wearing a hat and glasses, taken within 6 months, :type type only}</div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_id_card" data-i18n>{LNG_Identification No.}</label>
+                  <span class="form-control icon-profile">
+                    <input type="text" inputmode="numeric" id="enroll_id_card" name="id_card" maxlength="13" pattern="[0-9]{13}" data-validate="thaiIdCard" data-attr="value:id_card" required>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="enroll_birthday" data-i18n>{LNG_Birthday}</label>
+                  <span class="form-control icon-calendar">
+                    <input type="date" id="enroll_birthday" name="birthday" data-attr="value:birthday" required>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_phone" data-i18n>{LNG_Phone}</label>
+                  <span class="form-control icon-phone">
+                    <input type="tel" id="enroll_phone" name="phone" maxlength="12" data-attr="value:phone" required>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="enroll_email" data-i18n>{LNG_Email}</label>
+                  <span class="form-control icon-email">
+                    <input type="email" id="enroll_email" name="email" maxlength="255" data-attr="value:email">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_nationality" data-i18n>{LNG_Nationality}</label>
+                  <span class="form-control icon-world">
+                    <input type="text" id="enroll_nationality" name="nationality" maxlength="20" data-attr="value:nationality" required>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="enroll_religion" data-i18n>{LNG_Religion}</label>
+                  <span class="form-control icon-customer">
+                    <input type="text" id="enroll_religion" name="religion" maxlength="20" data-attr="value:religion" required>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <label for="enroll_address" data-i18n>{LNG_Address}</label>
+                <span class="form-control icon-address">
+                  <input type="text" id="enroll_address" name="address" maxlength="150" data-attr="value:address" required>
+                </span>
+              </div>
+              <!-- เลือกจากรายการแล้ว ตำบล/อำเภอ/จังหวัด และรหัสทั้งสามจะถูกเติมให้ครบเอง
+                   เพราะ API คืนฟิลด์ที่ชื่อตรงกับ id ของช่องเหล่านี้ -->
+              <div class="form-group">
+                <div class="width50">
+                  <label for="district" data-i18n>{LNG_District}</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="district" name="district" data-attr="value:district" data-autocomplete="true"
+                           data-source="api/enroll/address/district" data-min-length="1" data-max-results="50" required>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="amphur" data-i18n>{LNG_Amphur}</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="amphur" name="amphur" data-attr="value:amphur" data-autocomplete="true"
+                           data-source="api/enroll/address/amphur" data-min-length="1" data-max-results="50" required>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="province" data-i18n>{LNG_Province}</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="province" name="province" data-attr="value:province" data-autocomplete="true"
+                           data-source="api/enroll/address/province" data-min-length="1" data-max-results="50" required>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="enroll_zipcode" data-i18n>{LNG_Zipcode}</label>
+                  <span class="form-control icon-location">
+                    <input type="text" inputmode="numeric" id="enroll_zipcode" name="zipcode" maxlength="5" data-attr="value:zipcode" required>
+                  </span>
+                </div>
+              </div>
+              <input type="hidden" id="districtID" name="districtID" data-attr="value:districtID">
+              <input type="hidden" id="amphurID" name="amphurID" data-attr="value:amphurID">
+              <input type="hidden" id="provinceID" name="provinceID" data-attr="value:provinceID">
+            </fieldset>
+
+            <!-- ผู้ปกครองมีกี่รายการขึ้นกับรายการภาษา PARENT_LIST ที่ผู้ดูแลแก้ไขได้ -->
+            <fieldset data-role="parents-group">
+              <legend data-i18n>{LNG_Parent}</legend>
+              <div class="enroll-parents" data-role="parents"></div>
+            </fieldset>
+
+            <fieldset>
+              <legend data-i18n>{LNG_Education qualifications used for registration}</legend>
+              <div>
+                <label for="enroll_original_school" data-i18n>{LNG_Original school}</label>
+                <span class="form-control icon-office">
+                  <input type="text" id="enroll_original_school" name="original_school" maxlength="150" data-attr="value:original_school" required>
+                </span>
+              </div>
+              <!-- ผลการเรียนมีกี่ช่องขึ้นกับรายการภาษา ACADEMIC_RESULTS -->
+              <div class="enroll-grid" data-role="academic"></div>
+              <div>
+                <label for="enroll_attachments" data-i18n>{LNG_Attach file}</label>
+                <span class="form-control icon-upload">
+                  <input type="file" id="enroll_attachments" name="enroll[]" multiple data-files="attachments" data-preview="true"
+                         data-allow-remove-existing="true" data-action-url="api/enroll/enroll/removefile" data-file-reference="url">
+                </span>
+                <div class="comment" id="result_enroll"></div>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit" data-if="can_save">
+              <button type="submit" class="btn btn-primary large icon-save" data-i18n>{LNG_Save}</button>
+              <input type="hidden" name="link" data-attr="value:link">
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

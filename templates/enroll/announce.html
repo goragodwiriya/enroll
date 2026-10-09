@@ -1,0 +1,108 @@
+<!-- ประกาศผลการสมัคร (เปิดเมื่อผู้ดูแลเปิดใช้ แสดงเฉพาะสถานะที่เลือกไว้ ชื่อ + อักษรแรกของนามสกุล)
+     ตัวกรองเปลี่ยนหน้าด้วย ?level=&search= จัดการโดย initEnrollAnnounce -->
+<div class="enroll-public">
+  <form class="enroll-form" data-form="enrollAnnounce" data-load-api="api/enroll/announce/get" data-load-query-params="true"
+        data-on-load="initEnrollAnnounce" autocomplete="off">
+
+    <!-- หัวเว็บของหน้าผู้สมัคร — markup เดียวกันใน home / register / result / announce / privacy
+         (TemplateManager ไม่มี include) แก้ที่หนึ่งต้องแก้ให้ตรงกันทุกไฟล์ -->
+    <header class="enroll-site-header">
+      <div class="enroll-container enroll-site-nav">
+        <a class="enroll-brand" href="./" data-route="/">
+          <img class="enroll-brand-logo" data-if="logo" data-attr="src:logo" alt="">
+          <span class="enroll-brand-logo enroll-brand-mark icon-elearning" data-if="!logo"></span>
+          <span class="enroll-brand-text">
+            <strong data-text="school_name"></strong>
+            <small><span data-i18n>{LNG_Admissions}</span> <span data-text="school_year"></span></small>
+          </span>
+        </a>
+        <nav class="enroll-menu">
+          <a href="./" data-route="/" data-i18n>{LNG_Home}</a>
+          <a href="enroll-result" data-route="/enroll-result" data-i18n>{LNG_Result} &amp; {LNG_Print}</a>
+          <a class="active" href="enroll-announce" data-route="/enroll-announce" data-if="is_announce" data-i18n>{LNG_Result announcement}</a>
+          <button type="button" class="lang-toggle btn dropdown enroll-lang" data-component="lang-toggle" data-locales="th,en" title="{LNG_Language}">
+            <span data-lang-label>TH</span>
+            <ul>
+              <li><a data-locale="th">TH</a></li>
+              <li><a data-locale="en">EN</a></li>
+            </ul>
+          </button>
+          <a class="enroll-menu-staff icon-signin" href="login" data-route="/login" data-i18n>{LNG_For staff}</a>
+        </nav>
+        <a class="enroll-btn enroll-btn-primary enroll-menu-apply" href="enroll-edit" data-route="/enroll-edit" data-if="is_open"><span data-i18n>{LNG_Apply now}</span> <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main class="enroll-container enroll-main">
+      <section class="enroll-page-head">
+        <div>
+          <div class="enroll-eyebrow">Announcement</div>
+          <h1 data-i18n>{LNG_Result announcement}</h1>
+          <ul class="enroll-page-meta">
+            <li><span data-i18n>{LNG_School year}</span> <b data-text="school_year"></b></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="enroll-card enroll-notice" data-if="!enabled">
+        <span class="enroll-notice-icon icon-clock"></span>
+        <h2 data-i18n>{LNG_Results have not been announced yet}</h2>
+        <div class="enroll-actions">
+          <a class="enroll-btn enroll-btn-light icon-home" href="./" data-route="/" data-i18n>{LNG_Home}</a>
+        </div>
+      </section>
+
+      <section class="enroll-card enroll-announce" data-if="enabled">
+        <div class="enroll-grid enroll-announce-filter">
+          <div>
+            <label for="announce_level" data-i18n>{LNG_Education level}</label>
+            <span class="form-control icon-elearning">
+              <select id="announce_level" name="level" data-role="level" data-options-key="level" data-attr="value:level">
+                <option value="" data-placeholder="true" data-i18n>{LNG_all items}</option>
+              </select>
+            </span>
+          </div>
+          <div>
+            <label for="announce_search" data-i18n>{LNG_Search}</label>
+            <span class="form-control icon-search">
+              <input type="text" id="announce_search" name="search" data-role="search" maxlength="50" data-attr="value:search">
+              <button type="button" class="btn btn-primary" data-role="go" data-i18n>{LNG_Search}</button>
+            </span>
+          </div>
+        </div>
+        <div class="tablebody">
+          <table class="table border fullwidth enroll-announce-table">
+            <thead>
+              <tr>
+                <th data-i18n>{LNG_Applicant ID}</th>
+                <th data-i18n>{LNG_Name}</th>
+                <th data-i18n>{LNG_Education level}</th>
+                <th data-i18n>{LNG_Study plan}</th>
+                <th class="center" data-i18n>{LNG_Result}</th>
+              </tr>
+            </thead>
+            <tbody data-for="row in rows">
+              <template>
+                <tr>
+                  <td class="nowrap" data-text="row.enroll_no"></td>
+                  <td data-text="row.name"></td>
+                  <td data-text="row.level"></td>
+                  <td data-text="row.plan"></td>
+                  <td class="center"><span class="enroll-status" data-class="row.status_class" data-text="row.status"></span></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+        <p class="enroll-announce-empty center" data-if="!count" data-i18n>{LNG_No data available}</p>
+      </section>
+    </main>
+
+    <footer class="enroll-site-footer">
+      <div class="enroll-container">
+        <span>&copy; <span data-text="school_name"></span> · <span data-i18n>{LNG_Online admissions}</span></span>
+        <a href="enroll-privacy" data-route="/enroll-privacy" data-i18n>{LNG_Privacy Policy}</a>
+      </div>
+    </footer>
+  </form>
+</div>

@@ -1,0 +1,202 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <form data-form="enrollSettings" action="api/enroll/settings/save" method="post" data-ajax-submit="true" data-load-api="api/enroll/settings/get"
+            data-on-load="initEnrollSettings" data-confirm="Confirm save" autocomplete="off">
+        <div class="card-groups">
+          <header>
+            <div>
+              <h1 class="icon-register" data-i18n>{LNG_Module Settings} {LNG_Enroll}</h1>
+              <p data-i18n>{LNG_Enroll}</p>
+            </div>
+          </header>
+          <div class="content-body">
+            <fieldset>
+              <legend data-i18n>{LNG_Module Settings}</legend>
+              <div>
+                <label for="school_name" data-i18n>{LNG_School name}</label>
+                <span class="form-control icon-office">
+                  <input type="text" id="school_name" name="school_name" maxlength="150" data-attr="value:school_name">
+                </span>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_study_plan_count" data-i18n>{LNG_Study plan}</label>
+                  <span class="form-control icon-number">
+                    <input type="number" id="enroll_study_plan_count" name="enroll_study_plan_count" min="1" max="10" data-attr="value:enroll_study_plan_count">
+                  </span>
+                  <div class="comment" data-i18n>{LNG_Number of study plans that can be selected}</div>
+                </div>
+                <div class="width50">
+                  <label for="enroll_w" data-i18n>{LNG_Size of} {LNG_Image} ({LNG_Width})</label>
+                  <span class="form-control icon-width">
+                    <input type="number" id="enroll_w" name="enroll_w" min="100" step="10" data-attr="value:enroll_w">
+                  </span>
+                  <div class="comment" data-i18n>{LNG_Image size is in pixels} ({LNG_resized automatically})</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_csv_language" data-i18n>{LNG_Export}</label>
+                  <span class="form-control icon-excel">
+                    <select id="enroll_csv_language" name="enroll_csv_language" data-options-key="enroll_csv_language" data-attr="value:enroll_csv_language"></select>
+                  </span>
+                  <div class="comment" data-i18n>{LNG_CSV file language encoding}</div>
+                </div>
+                <div class="width50">
+                  <label for="enroll_country" data-i18n>{LNG_Country}</label>
+                  <span class="form-control icon-world">
+                    <select id="enroll_country" name="enroll_country" data-options-key="enroll_country" data-attr="value:enroll_country"></select>
+                  </span>
+                  <div class="comment" data-i18n>{LNG_Country for province selection information}</div>
+                </div>
+              </div>
+              <div>
+                <label for="enroll_editable" data-i18n>{LNG_Editable}</label>
+                <span class="form-control icon-group">
+                  <select id="enroll_editable" name="enroll_editable" data-attr="value:enroll_editable" data-options-key="status_fields" multiple>
+                  </select>
+                </span>
+                <div class="comment" data-i18n>{LNG_Applicants can edit the registration form in the state of their choice}</div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_prefix" data-i18n>{LNG_Prefix}</label>
+                  <span class="form-control icon-number">
+                    <input type="text" id="enroll_prefix" name="enroll_prefix" maxlength="20" placeholder="E%s" data-attr="value:enroll_prefix">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="enroll_no" data-i18n>{LNG_Applicant ID}</label>
+                  <span class="form-control icon-number">
+                    <input type="text" id="enroll_no" name="enroll_no" maxlength="20" placeholder="%04d" data-attr="value:enroll_no">
+                  </span>
+                </div>
+              </div>
+              <div class="comment" data-i18n>{LNG_The document number prefix, such as %Y%M, is replaced with the year and month. When the prefix changes (New month starts) The
+                number will count to 1 again.}, {LNG_%s will be replaced with the 2-digit academic year and level ID.}, {LNG_Number such as %04d (%04d means 4 digits, maximum 11
+                digits)}</div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Recruitment}</legend>
+              <div>
+                <label for="school_year" data-i18n>{LNG_School year}</label>
+                <span class="form-control icon-event">
+                  <input type="number" id="school_year" name="school_year" min="0" data-attr="value:school_year">
+                </span>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_begin" data-i18n>{LNG_from}</label>
+                  <span class="form-control icon-calendar">
+                    <input type="datetime-local" id="enroll_begin" name="enroll_begin" data-attr="value:enroll_begin">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="enroll_end" data-i18n>{LNG_to}</label>
+                  <span class="form-control icon-calendar">
+                    <input type="datetime-local" id="enroll_end" name="enroll_end" data-attr="value:enroll_end">
+                  </span>
+                </div>
+              </div>
+              <div class="comment" data-i18n>{LNG_Date of application opening-closing} ({LNG_Leave blank to accept applications at any time})</div>
+              <div>
+                <label for="enroll_capacity_exclude_statuses" data-i18n>{LNG_Statuses not counted toward places}</label>
+                <span class="form-control icon-group">
+                  <select id="enroll_capacity_exclude_statuses" name="enroll_capacity_exclude_statuses" data-attr="value:enroll_capacity_exclude_statuses" data-options-key="status_fields" multiple></select>
+                </span>
+                <div class="comment" data-i18n>{LNG_Applications with these statuses and applications that need review do not take a place. Staff can still save beyond the limit.}</div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Notifications}</legend>
+              <div>
+                <label>
+                  <input type="checkbox" class="switch" id="enroll_notify_email" name="enroll_notify_email" value="1" data-attr="checked:enroll_notify_email">
+                  <label for="enroll_notify_email" data-i18n>{LNG_Send the application link by email}</label>
+                </label>
+                <div class="comment" data-i18n>{LNG_Sent once after a new application, when the applicant gives an email address}</div>
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" class="switch" id="enroll_notify_sms" name="enroll_notify_sms" value="1" data-attr="checked:enroll_notify_sms">
+                  <label for="enroll_notify_sms" data-i18n>{LNG_Send the application link by SMS}</label>
+                </label>
+                <div class="comment" data-i18n>{LNG_Uses the SMS settings of the system (charges apply)}</div>
+              </div>
+              <div>
+                <label for="enroll_phone_limit" data-i18n>{LNG_Applications per phone number}</label>
+                <span class="form-control icon-phone">
+                  <input type="number" id="enroll_phone_limit" name="enroll_phone_limit" min="0" data-attr="value:enroll_phone_limit">
+                </span>
+                <div class="comment" data-i18n>{LNG_0 means unlimited. Staff are not limited.}</div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Result announcement}</legend>
+              <div>
+                <label>
+                  <input type="checkbox" class="switch" id="enroll_announce" name="enroll_announce" value="1" data-attr="checked:enroll_announce">
+                  <label for="enroll_announce" data-i18n>{LNG_Publish the result announcement page}</label>
+                </label>
+              </div>
+              <div>
+                <label for="enroll_announce_statuses" data-i18n>{LNG_Statuses to announce}</label>
+                <span class="form-control icon-group">
+                  <select id="enroll_announce_statuses" name="enroll_announce_statuses" data-attr="value:enroll_announce_statuses" data-options-key="status_fields" multiple></select>
+                </span>
+                <div class="comment" data-i18n>{LNG_Only the applicant ID, first name and the first letter of the surname are shown}</div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend data-i18n>{LNG_Admission card}</legend>
+              <div>
+                <label>
+                  <input type="checkbox" class="switch" id="enroll_exam_card" name="enroll_exam_card" value="1" data-attr="checked:enroll_exam_card">
+                  <label for="enroll_exam_card" data-i18n>{LNG_Allow applicants to print an admission card}</label>
+                </label>
+              </div>
+              <div>
+                <label for="enroll_exam_statuses" data-i18n>{LNG_Statuses that can print}</label>
+                <span class="form-control icon-group">
+                  <select id="enroll_exam_statuses" name="enroll_exam_statuses" data-attr="value:enroll_exam_statuses" data-options-key="status_fields" multiple></select>
+                </span>
+                <div class="comment" data-i18n>{LNG_None selected = every status}</div>
+              </div>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="enroll_exam_date" data-i18n>{LNG_Exam date}</label>
+                  <span class="form-control icon-calendar">
+                    <input type="text" id="enroll_exam_date" name="enroll_exam_date" maxlength="100" data-attr="value:enroll_exam_date">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="enroll_exam_place" data-i18n>{LNG_Exam location}</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="enroll_exam_place" name="enroll_exam_place" maxlength="150" data-attr="value:enroll_exam_place">
+                  </span>
+                </div>
+              </div>
+              <div>
+                <label for="enroll_exam_note" data-i18n>{LNG_Exam instructions}</label>
+                <span class="form-control">
+                  <textarea id="enroll_exam_note" name="enroll_exam_note" rows="4" maxlength="1000" data-attr="value:enroll_exam_note"></textarea>
+                </span>
+                <div class="comment" data-i18n>{LNG_The seat number is the applicant ID}</div>
+              </div>
+            </fieldset>
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary large icon-save" data-i18n>{LNG_Save}</button>
+              <button type="button" class="btn btn-danger large icon-reset" data-role="reset-database" data-i18n>{LNG_Reset database}</button>
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

@@ -1,0 +1,117 @@
+<div class="enroll-public">
+  <!-- ฟอร์มเดียวทำสองหน้าที่: โหลดผลการสมัครจาก ?id=<link> และเป็นฟอร์มค้นหา
+       เมื่อยังไม่รู้ว่าเป็นใคร (FormManager ส่ง query string ต่อให้ API เอง) -->
+  <form class="enroll-form" data-form="enrollResult" action="api/enroll/result/lookup" method="post" data-ajax-submit="true" data-validate="true"
+        data-load-api="api/enroll/result/get" data-load-query-params="true" data-on-load="initEnrollPublic" autocomplete="off">
+
+    <!-- หัวเว็บของหน้าผู้สมัคร — markup เดียวกันใน home / register / result / announce / privacy
+         (TemplateManager ไม่มี include) แก้ที่หนึ่งต้องแก้ให้ตรงกันทุกไฟล์ -->
+    <header class="enroll-site-header">
+      <div class="enroll-container enroll-site-nav">
+        <a class="enroll-brand" href="./" data-route="/">
+          <img class="enroll-brand-logo" data-if="logo" data-attr="src:logo" alt="">
+          <span class="enroll-brand-logo enroll-brand-mark icon-elearning" data-if="!logo"></span>
+          <span class="enroll-brand-text">
+            <strong data-text="school_name"></strong>
+            <small><span data-i18n>{LNG_Admissions}</span> <span data-text="school_year"></span></small>
+          </span>
+        </a>
+        <nav class="enroll-menu">
+          <a href="./" data-route="/" data-i18n>{LNG_Home}</a>
+          <a class="active" href="enroll-result" data-route="/enroll-result" data-i18n>{LNG_Result} &amp; {LNG_Print}</a>
+          <a href="enroll-announce" data-route="/enroll-announce" data-if="is_announce" data-i18n>{LNG_Result announcement}</a>
+          <button type="button" class="lang-toggle btn dropdown enroll-lang" data-component="lang-toggle" data-locales="th,en" title="{LNG_Language}">
+            <span data-lang-label>TH</span>
+            <ul>
+              <li><a data-locale="th">TH</a></li>
+              <li><a data-locale="en">EN</a></li>
+            </ul>
+          </button>
+          <a class="enroll-menu-staff icon-signin" href="login" data-route="/login" data-i18n>{LNG_For staff}</a>
+        </nav>
+        <a class="enroll-btn enroll-btn-primary enroll-menu-apply" href="enroll-edit" data-route="/enroll-edit" data-if="is_open"><span data-i18n>{LNG_Apply now}</span> <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main class="enroll-container enroll-main">
+      <section class="enroll-page-head">
+        <div>
+          <div class="enroll-eyebrow">Application status</div>
+          <h1 data-i18n>{LNG_Check application results}</h1>
+          <ul class="enroll-page-meta">
+            <li><span data-i18n>{LNG_School year}</span> <b data-text="school_year"></b></li>
+            <li data-if="period"><span data-i18n>{LNG_Date of application opening-closing}</span> <b data-text="period"></b></li>
+          </ul>
+        </div>
+      </section>
+
+      <fieldset class="enroll-card enroll-lookup" data-if="!found">
+        <legend data-i18n>{LNG_Registered Information}</legend>
+        <div class="enroll-callout icon-info" data-i18n>{LNG_Enter your ID number and date of birth to check the results.}</div>
+        <div class="enroll-grid">
+          <div>
+            <label for="lookup_id_card" data-i18n>{LNG_Identification No.}</label>
+            <span class="form-control icon-profile">
+              <input type="text" inputmode="numeric" id="lookup_id_card" name="id_card" maxlength="13" pattern="[0-9]{13}" required>
+            </span>
+          </div>
+          <div>
+            <label for="lookup_birthday" data-i18n>{LNG_Birthday}</label>
+            <span class="form-control icon-calendar">
+              <input type="date" id="lookup_birthday" name="birthday" required>
+            </span>
+          </div>
+        </div>
+        <div class="enroll-actions">
+          <button type="submit" class="enroll-btn enroll-btn-primary icon-search" data-i18n>{LNG_Search}</button>
+        </div>
+      </fieldset>
+
+      <section class="enroll-card enroll-result-card" data-if="found">
+        <div class="enroll-result-photo">
+          <img data-attr="src:picture" data-if="picture" alt="">
+          <span class="icon-customer" data-if="!picture"></span>
+        </div>
+        <div class="enroll-result-detail">
+          <div class="enroll-result-head">
+            <div>
+              <h2 data-text="name"></h2>
+              <span class="enroll-status" data-class="status_class" data-text="result_status_text"></span>
+            </div>
+            <img class="enroll-barcode" data-attr="src:barcode" alt="">
+          </div>
+          <dl>
+            <dt data-i18n>{LNG_Applicant ID}</dt>
+            <dd data-text="enroll_no"></dd>
+            <dt data-i18n>{LNG_Date}</dt>
+            <dd data-text="created_at"></dd>
+            <dt data-i18n>{LNG_Education level}</dt>
+            <dd data-text="level"></dd>
+            <dt data-i18n>{LNG_Study plan}</dt>
+            <dd data-text="plan"></dd>
+            <dt data-i18n>{LNG_Phone}</dt>
+            <dd><a data-attr="href:phone_url" data-text="phone"></a></dd>
+          </dl>
+          <div class="enroll-callout icon-print" data-i18n>{LNG_Registration is complete, please click the print button to print the application}</div>
+          <!-- data-role="print" / data-history="replace" / data-role="finish" จัดการโดย initEnrollPublic -->
+          <div class="enroll-actions">
+            <a class="enroll-btn enroll-btn-primary icon-print" target="_blank" data-role="print" data-attr="href:print_url" data-i18n>{LNG_Print application form}</a>
+            <a class="enroll-btn enroll-btn-light icon-barcode" target="_blank" data-role="print" data-if="card_url" data-attr="href:card_url" data-i18n>{LNG_Print admission card}</a>
+            <a class="enroll-btn enroll-btn-light icon-edit" data-if="can_edit" data-history="replace" data-attr="href:edit_url" data-i18n>{LNG_Edit}</a>
+            <button type="button" class="enroll-btn enroll-btn-light icon-valid" data-role="finish" data-i18n>{LNG_Finish}</button>
+          </div>
+          <p class="enroll-shared-hint icon-info" data-i18n>{LNG_Using a shared computer? Press Finish when you are done}</p>
+        </div>
+      </section>
+
+      <div class="enroll-card enroll-result-content" data-html="content" data-if="content"></div>
+    </main>
+
+    <footer class="enroll-site-footer">
+      <div class="enroll-container">
+        <span>&copy; <span data-text="school_name"></span> · <span data-i18n>{LNG_Online admissions}</span></span>
+        <a href="enroll-privacy" data-route="/enroll-privacy" data-i18n>{LNG_Privacy Policy}</a>
+      </div>
+    </footer>
+  </form>
+</div>

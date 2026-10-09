@@ -1,0 +1,285 @@
+<!-- ใบสมัคร (ใหม่ / แก้ไข) แบบทีละขั้น: ขั้นตอนเปลี่ยนด้วย initEnrollRegister
+     ทุกช่องอยู่ในฟอร์มเดียว ส่งครั้งเดียวในขั้นสุดท้าย ข้อผิดพลาดจาก API พากลับไปขั้นที่มีช่องนั้นเอง -->
+<div class="enroll-public">
+  <form class="enroll-form" data-form="enrollRegister" action="api/enroll/register/save" method="post" data-ajax-submit="true" data-validate="true"
+        data-load-api="api/enroll/register/get" data-load-query-params="true" data-on-load="initEnrollRegister"
+        enctype="multipart/form-data" autocomplete="off">
+
+    <!-- หัวเว็บของหน้าผู้สมัคร — markup เดียวกันใน home / register / result / announce / privacy
+         (TemplateManager ไม่มี include) แก้ที่หนึ่งต้องแก้ให้ตรงกันทุกไฟล์ -->
+    <header class="enroll-site-header">
+      <div class="enroll-container enroll-site-nav">
+        <a class="enroll-brand" href="./" data-route="/">
+          <img class="enroll-brand-logo" data-if="logo" data-attr="src:logo" alt="">
+          <span class="enroll-brand-logo enroll-brand-mark icon-elearning" data-if="!logo"></span>
+          <span class="enroll-brand-text">
+            <strong data-text="school_name"></strong>
+            <small><span data-i18n>{LNG_Admissions}</span> <span data-text="school_year"></span></small>
+          </span>
+        </a>
+        <nav class="enroll-menu">
+          <a href="./" data-route="/" data-i18n>{LNG_Home}</a>
+          <a href="enroll-result" data-route="/enroll-result" data-i18n>{LNG_Result} &amp; {LNG_Print}</a>
+          <a href="enroll-announce" data-route="/enroll-announce" data-if="is_announce" data-i18n>{LNG_Result announcement}</a>
+          <button type="button" class="lang-toggle btn dropdown enroll-lang" data-component="lang-toggle" data-locales="th,en" title="{LNG_Language}">
+            <span data-lang-label>TH</span>
+            <ul>
+              <li><a data-locale="th">TH</a></li>
+              <li><a data-locale="en">EN</a></li>
+            </ul>
+          </button>
+          <a class="enroll-menu-staff icon-signin" href="login" data-route="/login" data-i18n>{LNG_For staff}</a>
+        </nav>
+        <a class="enroll-btn enroll-btn-primary enroll-menu-apply active" href="enroll-edit" data-route="/enroll-edit" data-if="is_open"><span data-i18n>{LNG_Apply now}</span> <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main class="enroll-container enroll-main">
+      <section class="enroll-page-head">
+        <div>
+          <div class="enroll-eyebrow">Online application</div>
+          <h1 data-if="is_new" data-i18n>{LNG_New student admissions}</h1>
+          <h1 data-if="!is_new" data-i18n>{LNG_Edit application}</h1>
+          <ul class="enroll-page-meta">
+            <li><span data-i18n>{LNG_School year}</span> <b data-text="school_year"></b></li>
+            <li data-if="period"><span data-i18n>{LNG_Date of application opening-closing}</span> <b data-text="period"></b></li>
+            <li data-if="enroll_no"><span data-i18n>{LNG_Applicant ID}</span> <b data-text="enroll_no"></b></li>
+          </ul>
+        </div>
+        <!-- ใบสมัครเดิม: พิมพ์และดูผลได้จากหน้านี้เลย
+             data-role="print" / data-history="replace" / data-role="finish" จัดการโดย initEnrollPublic
+             (เครื่องที่ใช้ร่วมกัน: ไม่ทิ้งหน้าที่มีลิงก์ใบสมัครไว้ในประวัติย้อนกลับ) -->
+        <div class="enroll-page-actions" data-if="print_url">
+          <a class="enroll-btn enroll-btn-primary icon-print" target="_blank" data-role="print" data-attr="href:print_url" data-i18n>{LNG_Print application form}</a>
+          <a class="enroll-btn enroll-btn-light icon-verfied" data-history="replace" data-attr="href:result_url" data-i18n>{LNG_Check application results}</a>
+          <button type="button" class="enroll-btn enroll-btn-light icon-valid" data-role="finish" data-i18n>{LNG_Finish}</button>
+        </div>
+      </section>
+
+      <!-- ปิดรับสมัคร หรือใบสมัครแก้ไขไม่ได้แล้ว: API ส่ง closed มาแทนการตอบ 403
+           (หน้า /403 ต้องเข้าระบบ ผู้สมัครจะถูกพาไปหน้า login) -->
+      <section class="enroll-card enroll-notice" data-if="closed">
+        <span class="enroll-notice-icon icon-warning"></span>
+        <h2 data-text="closed_message"></h2>
+        <div class="enroll-actions">
+          <a class="enroll-btn enroll-btn-primary icon-verfied" data-history="replace" data-attr="href:result_url" data-i18n>{LNG_Check application results}</a>
+          <a class="enroll-btn enroll-btn-light icon-home" href="./" data-route="/" data-i18n>{LNG_Home}</a>
+        </div>
+      </section>
+
+      <div class="enroll-wizard" data-if="!closed">
+        <!-- ขั้นตอน: กดย้อนไปขั้นที่ผ่านมาแล้วได้ ขั้นถัดไปต้องผ่านการตรวจของขั้นปัจจุบันก่อน -->
+        <ol class="enroll-wizard-steps">
+          <li><button type="button" data-step-tab="0"><b>01</b> <span data-i18n>{LNG_Study plan}</span></button></li>
+          <li><button type="button" data-step-tab="1"><b>02</b> <span data-i18n>{LNG_Applicant}</span></button></li>
+          <li><button type="button" data-step-tab="2"><b>03</b> <span data-i18n>{LNG_Address and parents}</span></button></li>
+          <li><button type="button" data-step-tab="3"><b>04</b> <span data-i18n>{LNG_Education and documents}</span></button></li>
+          <li><button type="button" data-step-tab="4"><b>05</b> <span data-i18n>{LNG_Review and confirm}</span></button></li>
+        </ol>
+
+        <div class="enroll-wizard-body">
+          <p class="enroll-required-note icon-info" data-i18n>{LNG_Fields marked with * are required}</p>
+
+          <!-- 01 ระดับชั้นและแผนการเรียน -->
+          <fieldset class="enroll-step" data-step="0">
+            <legend data-i18n>{LNG_Enroll type}</legend>
+            <div class="enroll-grid">
+              <div>
+                <label for="enroll_level" data-i18n>{LNG_Education level}</label>
+                <span class="form-control icon-elearning">
+                  <select id="enroll_level" name="level" data-role="level" data-options-key="levels" data-attr="value:level" required></select>
+                </span>
+                <div class="comment" data-if="has_full_level" data-i18n>{LNG_Levels marked full are no longer accepting applications}</div>
+              </div>
+              <!-- ช่องเลือกแผนการเรียนมีกี่ช่องขึ้นกับค่ากำหนด enroll_study_plan_count
+                   และเปลี่ยนตัวเลือกตามระดับชั้น จึงสร้างโดย initEnrollRegister
+                   (display: contents ให้ช่องที่สร้างเรียงต่อในกริดเดียวกับระดับชั้น) -->
+              <div class="enroll-contents" data-role="plans"></div>
+            </div>
+          </fieldset>
+
+          <!-- 02 ข้อมูลผู้สมัคร -->
+          <fieldset class="enroll-step" data-step="1" hidden>
+            <legend data-i18n>{LNG_Registered Information}</legend>
+            <div class="enroll-student">
+              <!-- ตัวอัปโหลดไฟล์วางพรีวิวไว้ในกล่องนี้ (parent ของ .form-control)
+                   CSS วางพรีวิวทับช่องเลือกรูปให้ดูเป็นกรอบรูปเดียว -->
+              <div class="enroll-photo">
+                <label for="enroll_thumbnail" data-role="photo-label" data-i18n>{LNG_Picture of student}</label>
+                <span class="form-control icon-image">
+                  <input type="file" id="enroll_thumbnail" name="thumbnail" data-files="thumbnail" data-preview="true" accept="image/*">
+                </span>
+                <div class="comment" id="result_thumbnail" data-i18n>{LNG_Straight face photos Wearing a uniform, not wearing a hat and glasses, taken within 6 months, :type type only}</div>
+              </div>
+              <div class="enroll-student-fields">
+                <div class="enroll-grid enroll-grid-name">
+                  <div>
+                    <label for="enroll_title" data-i18n>{LNG_Prefix}</label>
+                    <span class="form-control">
+                      <select id="enroll_title" name="title" data-options-key="title" data-attr="value:title"></select>
+                    </span>
+                  </div>
+                  <div>
+                    <label for="enroll_name" data-i18n>{LNG_Name}</label>
+                    <span class="form-control icon-customer">
+                      <input type="text" id="enroll_name" name="name" maxlength="100" data-attr="value:name" required>
+                    </span>
+                  </div>
+                </div>
+                <div class="enroll-grid">
+                  <div>
+                    <label for="enroll_id_card" data-i18n>{LNG_Identification No.}</label>
+                    <span class="form-control icon-profile">
+                      <input type="text" inputmode="numeric" id="enroll_id_card" name="id_card" maxlength="13" pattern="[0-9]{13}" data-validate="thaiIdCard" data-attr="value:id_card" required>
+                    </span>
+                  </div>
+                  <div>
+                    <label for="enroll_birthday" data-i18n>{LNG_Birthday}</label>
+                    <span class="form-control icon-calendar">
+                      <input type="date" id="enroll_birthday" name="birthday" data-attr="value:birthday" required>
+                    </span>
+                  </div>
+                </div>
+                <div class="enroll-callout icon-info" data-i18n>{LNG_Enter your ID number and date of birth correctly. Used to login to edit additional information. and verification of application results}</div>
+                <div class="enroll-grid">
+                  <div>
+                    <label for="enroll_phone" data-i18n>{LNG_Phone}</label>
+                    <span class="form-control icon-phone">
+                      <input type="tel" id="enroll_phone" name="phone" maxlength="12" data-attr="value:phone" required>
+                    </span>
+                  </div>
+                  <div>
+                    <label for="enroll_email" data-i18n>{LNG_Email}</label>
+                    <span class="form-control icon-email">
+                      <input type="email" id="enroll_email" name="email" maxlength="255" data-attr="value:email">
+                    </span>
+                  </div>
+                  <div>
+                    <label for="enroll_nationality" data-i18n>{LNG_Nationality}</label>
+                    <span class="form-control icon-world">
+                      <input type="text" id="enroll_nationality" name="nationality" maxlength="20" data-attr="value:nationality" required>
+                    </span>
+                  </div>
+                  <div>
+                    <label for="enroll_religion" data-i18n>{LNG_Religion}</label>
+                    <span class="form-control icon-customer">
+                      <input type="text" id="enroll_religion" name="religion" maxlength="20" data-attr="value:religion" required>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- 03 ที่อยู่และผู้ปกครอง -->
+          <fieldset class="enroll-step" data-step="2" hidden>
+            <legend data-i18n>{LNG_Address}</legend>
+            <div>
+              <label for="enroll_address" data-i18n>{LNG_Address}</label>
+              <span class="form-control icon-address">
+                <input type="text" id="enroll_address" name="address" maxlength="150" data-attr="value:address" required>
+              </span>
+            </div>
+            <!-- เลือกจากรายการแล้ว ตำบล/อำเภอ/จังหวัด และรหัสทั้งสามจะถูกเติมให้ครบเอง
+                 เพราะ API คืนฟิลด์ที่ชื่อตรงกับ id ของช่องเหล่านี้ -->
+            <div class="enroll-grid">
+              <div>
+                <label for="district" data-i18n>{LNG_District}</label>
+                <span class="form-control icon-location">
+                  <input type="text" id="district" name="district" data-attr="value:district" data-autocomplete="true"
+                         data-source="api/enroll/address/district" data-min-length="1" data-max-results="50" required>
+                </span>
+              </div>
+              <div>
+                <label for="amphur" data-i18n>{LNG_Amphur}</label>
+                <span class="form-control icon-location">
+                  <input type="text" id="amphur" name="amphur" data-attr="value:amphur" data-autocomplete="true"
+                         data-source="api/enroll/address/amphur" data-min-length="1" data-max-results="50" required>
+                </span>
+              </div>
+              <div>
+                <label for="province" data-i18n>{LNG_Province}</label>
+                <span class="form-control icon-location">
+                  <input type="text" id="province" name="province" data-attr="value:province" data-autocomplete="true"
+                         data-source="api/enroll/address/province" data-min-length="1" data-max-results="50" required>
+                </span>
+              </div>
+              <div>
+                <label for="enroll_zipcode" data-i18n>{LNG_Zipcode}</label>
+                <span class="form-control icon-location">
+                  <input type="text" inputmode="numeric" id="enroll_zipcode" name="zipcode" maxlength="5" data-attr="value:zipcode" required>
+                </span>
+              </div>
+            </div>
+            <input type="hidden" id="districtID" name="districtID" data-attr="value:districtID">
+            <input type="hidden" id="amphurID" name="amphurID" data-attr="value:amphurID">
+            <input type="hidden" id="provinceID" name="provinceID" data-attr="value:provinceID">
+            <!-- ผู้ปกครองมีกี่รายการขึ้นกับรายการภาษา PARENT_LIST ที่ผู้ดูแลแก้ไขได้ -->
+            <div class="enroll-subsection" data-role="parents-group">
+              <h3 class="enroll-subhead" data-i18n>{LNG_Parent}</h3>
+              <div class="enroll-parents" data-role="parents"></div>
+            </div>
+          </fieldset>
+
+          <!-- 04 การศึกษาและเอกสาร -->
+          <fieldset class="enroll-step" data-step="3" hidden>
+            <legend data-i18n>{LNG_Education qualifications used for registration}</legend>
+            <div>
+              <label for="enroll_original_school" data-i18n>{LNG_Original school}</label>
+              <span class="form-control icon-office">
+                <input type="text" id="enroll_original_school" name="original_school" maxlength="150" data-attr="value:original_school" required>
+              </span>
+            </div>
+            <!-- ผลการเรียนมีกี่ช่องขึ้นกับรายการภาษา ACADEMIC_RESULTS -->
+            <div data-role="academic"></div>
+            <div>
+              <label for="enroll_attachments" data-i18n>{LNG_Attach file}</label>
+              <span class="form-control icon-upload">
+                <input type="file" id="enroll_attachments" name="enroll[]" multiple data-files="attachments" data-preview="true"
+                       data-allow-remove-existing="true" data-action-url="api/enroll/register/removefile" data-file-reference="url">
+              </span>
+              <div class="comment" id="result_enroll"></div>
+            </div>
+          </fieldset>
+
+          <!-- 05 ตรวจสอบและยืนยัน: รายการสรุปสร้างจากค่าที่กรอกโดย initEnrollRegister -->
+          <fieldset class="enroll-step" data-step="4" hidden>
+            <legend data-i18n>{LNG_Review and confirm}</legend>
+            <div class="enroll-callout icon-info" data-i18n>{LNG_Please check your information before submitting}</div>
+            <div class="enroll-summary" data-role="summary"></div>
+            <!-- ยินยอมตาม PDPA ก่อนส่งใบสมัครใหม่ (ใบเดิมยินยอมไว้แล้วตอนสมัคร) -->
+            <div class="enroll-consent" data-if="is_new">
+              <div class="enroll-consent-check">
+                <input type="checkbox" id="enroll_consent" name="consent" value="1" required>
+                <label for="enroll_consent" data-i18n>{LNG_I have read the privacy notice and consent to the school collecting and using the personal data of the applicant and parents for admission}</label>
+              </div>
+              <a class="enroll-consent-link icon-info" href="enroll-privacy" target="_blank" data-i18n>{LNG_Privacy Policy}</a>
+              <div class="comment" id="result_consent"></div>
+            </div>
+            <p class="enroll-certify icon-valid" data-i18n>{LNG_I certify that this information is true in all respects}</p>
+          </fieldset>
+        </div>
+
+        <div class="enroll-wizard-actions">
+          <button type="button" class="enroll-btn enroll-btn-light" data-role="prev"><span aria-hidden="true">←</span> <span data-i18n>{LNG_Back}</span></button>
+          <button type="button" class="enroll-btn enroll-btn-primary" data-role="next"><span data-i18n>{LNG_Next}</span> <span aria-hidden="true">→</span></button>
+          <button type="submit" class="enroll-btn enroll-btn-primary icon-save" data-role="submit" hidden><span data-if="is_new" data-i18n>{LNG_Submit application}</span><span data-if="!is_new" data-i18n>{LNG_Save}</span></button>
+          <input type="hidden" name="link" data-attr="value:link">
+          <input type="hidden" name="form_token" data-attr="value:form_token">
+        </div>
+        <!-- ช่องดักบอต: ซ่อนจากผู้ใช้และโปรแกรมอ่านหน้าจอ คนจึงไม่กรอก บอตมักกรอกทุกช่อง -->
+        <div class="enroll-hp" aria-hidden="true">
+          <label for="enroll_website">Website</label>
+          <input type="text" id="enroll_website" name="website" value="" tabindex="-1" autocomplete="off">
+        </div>
+      </div>
+    </main>
+
+    <footer class="enroll-site-footer">
+      <div class="enroll-container">
+        <span>&copy; <span data-text="school_name"></span> · <span data-i18n>{LNG_Online admissions}</span></span>
+        <a href="enroll-privacy" data-route="/enroll-privacy" data-i18n>{LNG_Privacy Policy}</a>
+      </div>
+    </footer>
+  </form>
+</div>

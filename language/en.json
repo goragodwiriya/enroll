@@ -1,0 +1,148 @@
+{
+    "ACADEMIC_RESULTS": {
+        "GPA": "Grade point average"
+    },
+    "ACCEPT_ALL": "Accept all",
+    "BOOLEANS": [
+        "Disable",
+        "Enabled"
+    ],
+    "CHANGE_COLOR": "change color",
+    "CHECK": "check",
+    "CHECKBOX": "Checkbox",
+    "COOKIES_SETTINGS": "Cookies settings",
+    "COUNTRIES": {
+        "TH": "Thai",
+        "LA": "Lao"
+    },
+    "CSV_LANGUAGES": {
+        "UTF-8": "UTF-8 with BOM",
+        "TIS-620": "TIS-620"
+    },
+    "DATE_FORMAT": "d M Y, H:i",
+    "DATE_LONG": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ],
+    "DATE_SHORT": [
+        "Su",
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa"
+    ],
+    "DISABLE": "Disable",
+    "DRAG_AND_DROP_TO_REORDER": "Drag and drop to reorder",
+    "ENABLE": "Enable",
+    "ENROLL_ATTACH_COMMENT": "Please attach relevant documents such as transcript Name change copy With signing",
+    "ENROLL_PRINT_NOTE": "This document is a statement of intent only, not an application for admission. Please wear your school uniform and submit this document together with the required evidence at the school.",
+    "GO_TO_PAGE": "go to page",
+    "INVALID_DATA": "XXX Invalid data",
+    "LINE_FOLLOW_MESSAGE": "Hello, :name This is :title official account. We will send you news via this channel.",
+    "LINE_REPLY_MESSAGE": "Sorry, can&#039;t reply to this message.",
+    "LOGIN_FIELDS": {
+        "username": "Username",
+        "email": "Email",
+        "phone": "Phone",
+        "id_card": "Identification No."
+    },
+    "MAIL_PROGRAMS": [
+        "Send with PHP",
+        "Send with PHPMailer+SMTP (recommended)",
+        "Send with PHPMailer+PHP Mail"
+    ],
+    "MONTH_LONG": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "MONTH_SHORT": {
+        "1": "Jan",
+        "2": "Feb",
+        "3": "Mar",
+        "4": "Apr",
+        "5": "May",
+        "6": "Jun",
+        "7": "Jul",
+        "8": "Aug",
+        "9": "Sep",
+        "10": "Oct",
+        "11": "Nov",
+        "12": "Dec"
+    },
+    "NEXT_MONTH": "Next Month",
+    "now": "Just now",
+    "PARENT_LIST": {
+        "father": "Father",
+        "mother": "Mother",
+        "parent": "Parent"
+    },
+    "PLEASE_BROWSE_FILE": "Please browse file",
+    "PLEASE_FILL_IN": "Please fill in",
+    "PLEASE_SAVE_BEFORE_CONTINUING": "Please save before continuing",
+    "PLEASE_SELECT": "Please select",
+    "PLEASE_SELECT_AT_LEAST_ONE_ITEM": "Please select XXX at least one item",
+    "PREV_MONTH": "Prev Month",
+    "PUBLISHEDS": [
+        "Unpublished",
+        "Published"
+    ],
+    "REGISTER_STATUS": {
+        "0": "Pending",
+        "1": "Approve",
+        "2": "Incomplete documents",
+        "3": "Disapproval",
+        "4": "1st reserve",
+        "5": "2nd reserve",
+        "7": "3rd reserve"
+    },
+    "SELECT_ALL": "select all",
+    "SELECT_NONE": "select none",
+    "SEXES": {
+        "u": "Not specified",
+        "f": "Female",
+        "m": "Male"
+    },
+    "SHOWING_PAGE": "showing page",
+    "SMS_SENDER_COMMENT": "Some packages may not be able to assign the sender name. Please check with the service provider.",
+    "SMTPSECURIES": {
+        "": "Clear Text",
+        "ssl": "Server using a secure connection (SSL)"
+    },
+    "SORRY_XXX_NOT_FOUND": "Sorry XXX not found",
+    "SUCCESSFULLY_COPIED_TO_CLIPBOARD": "Successfully copied to clipboard",
+    "SUCCESSFULLY_UPLOADED_XXX_FILES": "Successfully uploaded XXX files",
+    "THEME_WIDTH": {
+        "default": "Default",
+        "wide": "Wide",
+        "fullwidth": "Extra wide"
+    },
+    "THE_TYPE_OF_FILE_IS_INVALID": "The type of file is invalid",
+    "TIME_FORMAT": "H:i",
+    "TITLES": {
+        "1": "Master",
+        "2": "Miss",
+        "3": "Mr.",
+        "4": "Miss"
+    },
+    "UNCHECK": "uncheck",
+    "YEAR_OFFSET": 0,
+    "YOU_WANT_TO_XXX": "You want to XXX ?",
+    "YOU_WANT_TO_XXX_THE_SELECTED_ITEMS": "You want to XXX the selected items ?"
+}

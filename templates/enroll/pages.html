@@ -1,0 +1,52 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <!-- แก้ไขเนื้อหาหน้าแรกของผู้สมัคร และข้อความในหน้าผลการสมัคร แยกตามภาษา
+           (เมนู "รายละเอียดของหน้า" ของระบบเดิม) เปลี่ยนหน้าหรือภาษา = โหลดเนื้อหาของหน้านั้น -->
+      <form data-form="enrollPages" action="api/enroll/pages/save" method="post" data-ajax-submit="true"
+            data-load-api="api/enroll/pages/get" data-load-query-params="true" data-on-load="initEnrollPages" autocomplete="off">
+        <div class="card-groups">
+          <header>
+            <div>
+              <h1 class="icon-write" data-i18n>{LNG_Page details}</h1>
+              <p data-i18n>{LNG_Enroll}</p>
+            </div>
+            <div>
+              <a class="btn icon-world" target="_blank" data-attr="href:view_url" data-i18n>{LNG_View}</a>
+            </div>
+          </header>
+          <div class="content-body">
+            <fieldset>
+              <div class="form-group">
+                <div class="width50">
+                  <label for="pages_src" data-i18n>{LNG_Pages}</label>
+                  <span class="form-control icon-write">
+                    <select id="pages_src" name="src" data-role="src" data-options-key="src" data-attr="value:src"></select>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="pages_language" data-i18n>{LNG_Language}</label>
+                  <span class="form-control icon-language">
+                    <select id="pages_language" name="language" data-role="language" data-options-key="language" data-attr="value:language"></select>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <label for="pages_detail" data-i18n>{LNG_Detail}</label>
+                <textarea id="pages_detail" name="detail" data-element="richtext" data-rte-min-height="400" data-attr="value:detail"></textarea>
+              </div>
+            </fieldset>
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary large icon-save" data-i18n>{LNG_Save}</button>
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

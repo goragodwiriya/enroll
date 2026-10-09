@@ -1,0 +1,39 @@
+<!-- รายงานผู้สมัคร (เจ้าหน้าที่) — api/enroll/applicants -->
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-list" data-i18n>{LNG_Report} {LNG_Enroll}</h1>
+            <p data-i18n>{LNG_Applicants}</p>
+          </div>
+        </header>
+        <div class="content-body">
+          <div class="tablebody">
+            <table class="table border fullwidth" data-table="enrollApplicants" data-source="api/enroll/applicants" data-default-sort="created_at desc"
+                   data-page-size="25" data-search-columns="name">
+              <thead>
+                <tr>
+                  <!-- ตัวกรองของ TableManager: แสดงทีละระดับชั้น (ไม่มี "ทั้งหมด") ค่าอยู่ใน URL ?level= -->
+                  <th data-field="level" data-hidden="true" data-filter="true" data-type="select" data-show-all="false" data-i18n>{LNG_Education level}</th>
+                  <th data-field="created_at_text" data-sort="created_at" class="nowrap" data-cell-class="nowrap" data-i18n>{LNG_Date}</th>
+                  <th data-field="name" data-sort="name" data-i18n>{LNG_Name}</th>
+                  <th data-field="plan_text" data-i18n>{LNG_Study plan}</th>
+                  <th data-field="result_status_text" class="center" data-cell-class="center"
+                      data-template="<span class='enroll-status ${status_class}'>${result_status_text}</span>" data-i18n>{LNG_Result}</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

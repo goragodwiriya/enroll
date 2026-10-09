@@ -1,0 +1,58 @@
+<!-- ตารางผู้สมัคร (เจ้าหน้าที่) — api/enroll/enrolls
+     ตัวกรองเป็นของ TableManager เอง: คอลัมน์ซ่อนที่มี data-filter (ชื่อตรงกับ getFilters() ของ API)
+     ค่าตัวกรองอยู่ใน URL (?level=&plan=...) การ์ดบนหน้าแรกจึงลิงก์มาที่ระดับชั้นนั้นได้ -->
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-list" data-i18n>{LNG_List of} {LNG_Enroll}</h1>
+            <p data-i18n>{LNG_Applicants}</p>
+          </div>
+          <div>
+            <!-- ดาวน์โหลดตามตัวกรอง คำค้น และการเรียงลำดับที่ใช้อยู่ (initEnrollTable) -->
+            <button type="button" class="btn btn-warning icon-excel" data-role="export-csv" data-export-table="enrolls" data-i18n>{LNG_Download} CSV</button>
+            <a class="btn btn-primary icon-register" href="/enroll" data-i18n>{LNG_Add application}</a>
+          </div>
+        </header>
+        <div class="content-body">
+          <div class="tablebody">
+            <table class="table border fullwidth" data-table="enrolls" data-source="api/enroll/enrolls" data-default-sort="created_at desc" data-page-size="25"
+                   data-search-columns="name,enroll_no" data-show-checkbox="true" data-actions='{"reviewed":"Mark as reviewed","delete":"Delete"}' data-action-url="api/enroll/enrolls/action"
+                   data-action-button="Process|btn-success" data-on-load="initEnrollTable">
+              <thead>
+                <tr>
+                  <!-- ตัวกรอง: แสดงทีละระดับชั้น (แผนการเรียนแต่ละระดับไม่เหมือนกัน) และต้องเลือกผลการเรียนที่จะดู
+                       จึงไม่มีตัวเลือก "ทั้งหมด" ส่วนแผน/ผล/ป้ายต้องตรวจสอบ มี -->
+                  <th data-field="level" data-hidden="true" data-filter="true" data-type="select" data-show-all="false" data-i18n>{LNG_Education level}</th>
+                  <th data-field="result" data-hidden="true" data-filter="true" data-type="select" data-show-all="false" data-i18n>{LNG_Academic result}</th>
+                  <th data-field="plan" data-hidden="true" data-filter="true" data-type="select" data-show-all="true" data-all-value="" data-i18n>{LNG_Study plan}</th>
+                  <th data-field="status" data-hidden="true" data-filter="true" data-type="select" data-show-all="true" data-all-value="" data-i18n>{LNG_Result}</th>
+                  <th data-field="review" data-hidden="true" data-filter="true" data-type="select" data-show-all="true" data-all-value="" data-i18n>{LNG_Needs review}</th>
+                  <th data-field="enroll_no" data-sort="enroll_no" data-formatter="formatEnrollBarcode" data-i18n>{LNG_Applicant ID}</th>
+                  <th data-field="created_at_text" data-sort="created_at" class="nowrap" data-cell-class="nowrap" data-i18n>{LNG_Date}</th>
+                  <th data-field="name" data-sort="name" class="nowrap" data-cell-class="nowrap" data-formatter="formatEnrollName" data-i18n>{LNG_Name}</th>
+                  <th data-field="academic_value" data-sort="academic_value" class="center" data-cell-class="center" data-i18n>{LNG_Academic result}</th>
+                  <!-- เปลี่ยนค่าแล้วบันทึกทันที จัดการโดย initEnrollTable -->
+                  <th data-field="result_plan" data-sort="result_plan" class="center" data-cell-class="center" data-cell-element="select" data-options-key="result_plan" data-i18n>
+                    {LNG_Study plan}</th>
+                  <th data-field="result_status" data-sort="result_status" class="center" data-cell-class="center" data-cell-element="select" data-options-key="result_status"
+                      data-i18n>{LNG_Result}</th>
+                  <!-- พิมพ์ใบสมัคร / บัตรประจำตัวผู้สอบ (เมื่อเปิดใช้) / ดูและแก้ไข (หน้า /enroll) — formatEnrollActions -->
+                  <th data-field="link" class="center nowrap" data-cell-class="center nowrap" data-formatter="formatEnrollActions"></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 Admin Framework - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>
