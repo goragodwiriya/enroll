@@ -1,0 +1,101 @@
+<div class="sheet enroll-sheet">
+  <header class="es-head">
+    <div class="es-head-main">
+      <div class="es-brand">
+        %LOGO%
+        <div>
+          <h1>%SCHOOL_NAME%</h1>
+          <p class="es-doc">{LNG_Application for further study in grade} <b>%LEVEL%</b></p>
+          <p class="es-year">{LNG_School year} <b>%YEAR%</b></p>
+        </div>
+      </div>
+      <div class="es-summary">
+        <div class="es-barcode">
+          <img src="data:image/png;base64,%BARCODE%" alt="%ENROLL_NO%">
+        </div>
+        <div class="es-chip"><small>{LNG_Applicant ID}</small><b>%ENROLL_NO%</b></div>
+        <div class="es-chip es-chip-wide"><small>{LNG_Study plan}</small><b>%PLAN%</b></div>
+        <div class="es-chip"><small>{LNG_Date}</small><b>%DATE%</b></div>
+      </div>
+    </div>
+    <!-- รูปนักเรียน ไม่มีรูป = กรอบว่างพร้อมข้อความให้ติดรูปเอง -->
+    <div class="es-photo"><span>{LNG_Picture of student}</span>%PICTURE%</div>
+  </header>
+
+  <section class="es-section">
+    <h2><i>1</i>{LNG_Registered Information}</h2>
+    <div class="es-fields">
+      <div class="field es-span-2"><b>{LNG_Name}</b><span>%TITLE%%NAME%</span></div>
+      <div class="field es-span-2"><b>{LNG_Identification No.}</b><span class="blocknumber">%ID_CARD%</span></div>
+      <div class="field"><b>{LNG_Birthday}</b><span>%BIRTHDAY%</span></div>
+      <div class="field"><b>{LNG_Nationality}</b><span>%NATIONALITY%</span></div>
+      <div class="field"><b>{LNG_Religion}</b><span>%RELIGION%</span></div>
+      <div class="field"><b>{LNG_Phone}</b><span>%PHONE%</span></div>
+      <div class="field es-span-2"><b>{LNG_Email}</b><span>%EMAIL%</span></div>
+    </div>
+  </section>
+
+  <section class="es-section">
+    <h2><i>2</i>{LNG_Address}</h2>
+    <div class="es-fields">
+      <div class="field es-span-4"><b>{LNG_Address}</b><span>%ADDRESS%</span></div>
+      <div class="field es-span-2"><b>{LNG_District}</b><span>%DISTRICT%</span></div>
+      <div class="field es-span-2"><b>{LNG_Amphur}</b><span>%AMPHUR%</span></div>
+      <div class="field es-span-2"><b>{LNG_Province}</b><span>%PROVINCE%</span></div>
+      <div class="field es-span-2"><b>{LNG_Zipcode}</b><span>%ZIPCODE%</span></div>
+    </div>
+  </section>
+
+  <section class="es-section">
+    <h2><i>3</i>{LNG_Education qualifications used for registration}</h2>
+    <div class="es-fields">
+      <div class="field es-span-4"><b>{LNG_Original school}</b><span>%ORIGINAL_SCHOOL%</span></div>
+      %ACADEMIC_RESULTS%
+    </div>
+  </section>
+
+  <section class="es-section">
+    <h2><i>4</i>{LNG_Parent}</h2>
+    <table class="es-table">
+      <thead>
+        <tr><th></th><th>{LNG_Name}</th><th>{LNG_Phone}</th></tr>
+      </thead>
+      <tbody>
+        %PARENT%
+      </tbody>
+    </table>
+  </section>
+
+  <div class="es-sign">
+    <p>{LNG_I certify that this information is true in all respects}</p>
+    <p>{LNG_Signed} <span class="line"></span> {LNG_Applicant}</p>
+    <p>( %TITLE%%NAME% )</p>
+  </div>
+
+  <section class="es-staff">
+    <h3>{LNG_For staff only}</h3>
+    <div class="es-staff-grid">
+      <div>
+        <b>{LNG_Document check}</b>
+        <p><span class="checked"></span> {LNG_House registration copy}</p>
+        <p><span class="checked"></span> {LNG_Educational evidence}</p>
+        <p><span class="checked"></span> {LNG_Uniform photo 1 inch 3 pieces}</p>
+      </div>
+      <div>
+        <b>{LNG_Applicant qualifications}</b>
+        <p><span class="checked"></span> {LNG_Correct}</p>
+        <p><span class="checked"></span> {LNG_Incorrect}</p>
+      </div>
+      <div class="es-staff-sign">
+        <p>{LNG_Signed} <span class="line"></span></p>
+        <p>( <span class="line"></span> )</p>
+        <p>{LNG_Document checker}</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="es-note">
+    <b>{LNG_Explanation}</b>
+    <p>{LNG_ENROLL_PRINT_NOTE}</p>
+  </footer>
+</div>

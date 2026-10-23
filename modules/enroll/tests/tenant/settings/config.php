@@ -1,0 +1,60 @@
+<?php
+return array (
+  'version' => '7.0.4',
+  'web_title' => 'Now.js',
+  'web_description' => 'Admin Framework by Now.js',
+  'timezone' => 'Asia/Bangkok',
+  'enroll_w' => 600,
+  'enroll_csv_language' => 'UTF-8',
+  'enroll_study_plan_count' => 1,
+  'enroll_country' => 'TH',
+  'enroll_begin' => 0,
+  'enroll_end' => 0,
+  'enroll_editable' => 
+  array (
+    0 => 0,
+    1 => 2,
+  ),
+  'school_name' => '',
+  'school_year' => 2569,
+  'enroll_prefix' => 'E%s',
+  'enroll_no' => '%04d',
+  'skin' => 'skin/booking',
+  'header_bg_color' => '#769E51',
+  'warpper_bg_color' => '#D2D2D2',
+  'header_color' => '#FFFFFF',
+  'footer_color' => '#7E7E7E',
+  'logo_color' => '#000000',
+  'login_header_color' => '#000000',
+  'login_footer_color' => '#7E7E7E',
+  'login_color' => '#000000',
+  'login_bg_color' => '#D2D2D2',
+  'theme_width' => 'wide',
+  'password_key' => '6a8f89a36db92',
+  'reversion' => 1788490403,
+  'stored_img_type' => '.jpg',
+  'api_tokens' => 
+  array (
+    'internal' => '8784899c942a06e141c2d6593cbc8ef7b2e81dd0',
+    'external' => '83128e5ada6685dad62bce824233d2acd4ece7e5',
+  ),
+  'api_secret' => '54b669118d3f0',
+  'jwt_secret' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+  'api_ips' => 
+  array (
+    0 => '0.0.0.0',
+  ),
+  'api_cors' => '*',
+  'enroll_attach_file_typies' => 
+  array (
+    0 => 'jpg',
+    1 => 'jpeg',
+    2 => 'png',
+    3 => 'pdf',
+    4 => 'webp',
+  ),
+  'email_use_phpMailer' => 1,
+  'email_Host' => '127.0.0.1',
+  'email_Port' => 1,
+  'email_Timeout' => 2,
+);
