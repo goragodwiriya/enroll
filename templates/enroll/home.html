@@ -1,0 +1,194 @@
+<!-- หน้าแรกของผู้สมัคร: หน้าเว็บรับสมัครนักเรียน (ระดับชั้นที่เปิดรับ ขั้นตอน และรายละเอียดก่อนสมัคร)
+     เปิดได้โดยไม่ต้องเข้าระบบ รายละเอียดการรับสมัครแก้ไขได้ที่เมนูตั้งค่า > ลงทะเบียนเรียน > รายละเอียดของหน้า -->
+<div class="enroll-public">
+  <div data-component="api" data-endpoint="api/enroll/home/get">
+    <!-- หัวเว็บของหน้าผู้สมัคร — markup เดียวกันใน home / register / result / announce / privacy
+         (TemplateManager ไม่มี include) แก้ที่หนึ่งต้องแก้ให้ตรงกันทุกไฟล์ -->
+    <header class="enroll-site-header">
+      <div class="enroll-container enroll-site-nav">
+        <a class="enroll-brand" href="./" data-route="/">
+          <img class="enroll-brand-logo" data-if="data.logo" data-attr="src:data.logo" alt="">
+          <span class="enroll-brand-logo enroll-brand-mark icon-elearning" data-if="!data.logo"></span>
+          <span class="enroll-brand-text">
+            <strong data-text="data.school_name"></strong>
+            <small><span data-i18n>{LNG_Admissions}</span> <span data-text="data.school_year"></span></small>
+          </span>
+        </a>
+        <nav class="enroll-menu">
+          <a class="active" href="./" data-route="/" data-i18n>{LNG_Home}</a>
+          <a href="enroll-result" data-route="/enroll-result" data-i18n>{LNG_Result} &amp; {LNG_Print}</a>
+          <a href="enroll-announce" data-route="/enroll-announce" data-if="data.is_announce" data-i18n>{LNG_Result announcement}</a>
+          <button type="button" class="lang-toggle btn dropdown enroll-lang" data-component="lang-toggle" data-locales="th,en" title="{LNG_Language}">
+            <span data-lang-label>TH</span>
+            <ul>
+              <li><a data-locale="th">TH</a></li>
+              <li><a data-locale="en">EN</a></li>
+            </ul>
+          </button>
+          <a class="enroll-menu-staff icon-signin" href="login" data-route="/login" data-i18n>{LNG_For staff}</a>
+        </nav>
+        <a class="enroll-btn enroll-btn-primary enroll-menu-apply" href="enroll-edit" data-route="/enroll-edit" data-if="data.is_open"><span data-i18n>{LNG_Apply now}</span> <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="enroll-container enroll-landing">
+        <div class="enroll-landing-copy">
+          <div class="enroll-pill" data-if="data.is_open"><span class="enroll-dot"></span><span data-i18n>{LNG_Applications open}</span><span data-if="data.period"> • <span data-text="data.period"></span></span></div>
+          <div class="enroll-pill is-closed" data-if="!data.is_open"><span class="enroll-dot"></span><span data-i18n>{LNG_Applications closed}</span></div>
+          <h1><span data-i18n>{LNG_New student admissions}</span><br><span data-i18n>{LNG_School year}</span> <em data-text="data.school_year"></em></h1>
+          <p class="enroll-lead" data-i18n>{LNG_Apply online anywhere, any time. Fill in the application, print it and check your results in one place.}</p>
+          <div class="enroll-landing-actions" data-if="data.is_open">
+            <button type="button" class="enroll-btn enroll-btn-primary" data-scroll="programs"><span data-i18n>{LNG_Choose a level and apply}</span> <span aria-hidden="true">↗</span></button>
+            <button type="button" class="enroll-btn enroll-btn-light" data-scroll="process" data-i18n>{LNG_See how to apply}</button>
+          </div>
+          <!-- นอกช่วงรับสมัคร หรือรับครบทุกแผนแล้ว (ข้อความมาจาก API) -->
+          <div class="enroll-landing-closed" data-if="!data.is_open">
+            <p class="enroll-notice-text icon-warning" data-text="data.closed_message"></p>
+            <a class="enroll-btn enroll-btn-primary" href="enroll-result" data-route="/enroll-result"><span data-i18n>{LNG_Check application results}</span> <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="enroll-landing-note"><b aria-hidden="true">✓</b> <span data-i18n>{LNG_Students and parents can apply online}</span></div>
+        </div>
+
+        <!-- ภาพอาคารเรียนวาดด้วย CSS (ตกแต่ง) -->
+        <div class="enroll-visual" aria-hidden="true">
+          <div class="enroll-visual-label">A PLACE TO GROW.</div>
+          <div class="enroll-school">
+            <div class="enroll-school-roof"></div>
+            <div class="enroll-school-windows"><i></i><i></i><i></i><i></i></div>
+            <div class="enroll-school-windows is-right"><i></i><i></i><i></i><i></i></div>
+            <div class="enroll-school-center">
+              <div class="enroll-school-clock"></div>
+              <div class="enroll-school-door"></div>
+            </div>
+          </div>
+          <div class="enroll-visual-card">
+            <div>
+              <strong data-text="data.school_name"></strong>
+              <small data-i18n>{LNG_Learn • Discover • Grow}</small>
+            </div>
+            <img class="enroll-visual-badge" data-if="data.logo" data-attr="src:data.logo" alt="">
+            <span class="enroll-visual-badge" data-if="!data.logo">✦</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="enroll-container">
+        <div class="enroll-stats">
+          <div class="enroll-stat"><strong data-text="data.stats.levels"></strong><span data-i18n>{LNG_Levels open}</span></div>
+          <div class="enroll-stat"><strong data-text="data.stats.plans"></strong><span data-i18n>{LNG_Study plan}</span></div>
+          <div class="enroll-stat" data-if="data.stats.seats"><strong data-text="data.stats.seats"></strong><span data-i18n>{LNG_Places in total}</span></div>
+          <div class="enroll-stat" data-if="!data.stats.seats"><strong data-i18n>{LNG_Online}</strong><span data-i18n>{LNG_Apply from anywhere}</span></div>
+        </div>
+      </section>
+
+      <!-- ระดับชั้นและแผนการเรียนที่เปิดรับ พร้อมจำนวนที่รับ / สมัครแล้ว (แผนที่ไม่กำหนดจำนวนไม่แสดงตัวเลข) -->
+      <section class="enroll-container enroll-section-block" id="programs" data-if="data.levels.length">
+        <div class="enroll-section-head">
+          <div>
+            <div class="enroll-eyebrow">Find your next chapter</div>
+            <h2 data-i18n>{LNG_Choose your next step}</h2>
+            <p data-i18n>{LNG_Choose the level you want to apply for to see its study plans}</p>
+          </div>
+          <span class="enroll-chip"><span data-i18n>{LNG_School year}</span> <span data-text="data.school_year"></span></span>
+        </div>
+        <div class="enroll-level-cards" data-for="level in data.levels">
+          <template>
+            <article class="enroll-level-card" data-class="level.full ? 'is-full' : 'is-open'">
+              <div class="enroll-level-cover">
+                <div>
+                  <small data-text="level.english"></small>
+                  <div class="enroll-grade" data-text="level.short"></div>
+                </div>
+                <span class="enroll-level-symbol" aria-hidden="true"></span>
+              </div>
+              <div class="enroll-level-body">
+                <div class="enroll-level-head">
+                  <h3 data-text="level.topic"></h3>
+                  <b class="enroll-plan-full" data-if="level.full" data-i18n>{LNG_Full}</b>
+                </div>
+                <ul class="enroll-plan-list" data-for="plan in level.plans">
+                  <template>
+                    <li data-class="plan.full ? 'is-full' : 'is-open'">
+                      <span data-text="plan.topic"></span>
+                      <small data-if="plan.seats" data-text="plan.seats"></small>
+                      <b class="enroll-plan-full" data-if="plan.full" data-i18n>{LNG_Full}</b>
+                    </li>
+                  </template>
+                </ul>
+                <div class="enroll-level-info">
+                  <span><strong data-text="level.plan_count"></strong> <span data-i18n>{LNG_Study plan}</span></span>
+                  <span data-if="level.seats"><span data-i18n>{LNG_Admit}</span> <strong data-text="level.seats"></strong> <span data-i18n>{LNG_people}</span></span>
+                </div>
+                <a class="enroll-btn enroll-btn-primary enroll-btn-block" data-if="level.can_apply" data-attr="href:level.apply_url"><span data-i18n>{LNG_Apply for}</span> <span data-text="level.short"></span> <span aria-hidden="true">↗</span></a>
+                <span class="enroll-btn enroll-btn-muted enroll-btn-block" data-if="level.full" data-i18n>{LNG_This education level is full}</span>
+              </div>
+            </article>
+          </template>
+        </div>
+        <p class="enroll-levels-note icon-info" data-i18n>{LNG_Numbers show applications choosing the plan first / places to admit}</p>
+      </section>
+
+      <section class="enroll-container enroll-section-block" id="process">
+        <div class="enroll-section-head">
+          <div>
+            <div class="enroll-eyebrow">How to apply</div>
+            <h2 data-i18n>{LNG_Apply in 4 easy steps}</h2>
+            <p data-i18n>{LNG_Get ready for a new beginning}</p>
+          </div>
+        </div>
+        <div class="enroll-steps">
+          <article>
+            <span class="enroll-step-number">01</span>
+            <h3 data-i18n>{LNG_Choose a level}</h3>
+            <p data-i18n>{LNG_Choose the level and study plans you are interested in}</p>
+          </article>
+          <article>
+            <span class="enroll-step-number">02</span>
+            <h3 data-i18n>{LNG_Fill in the application}</h3>
+            <p data-i18n>{LNG_Applicant details, address, parents and education results with a photo}</p>
+          </article>
+          <article>
+            <span class="enroll-step-number">03</span>
+            <h3 data-i18n>{LNG_Review and confirm}</h3>
+            <p data-i18n>{LNG_Check everything before sending and get your applicant ID right away}</p>
+          </article>
+          <article>
+            <span class="enroll-step-number">04</span>
+            <h3 data-i18n>{LNG_Print and follow up}</h3>
+            <p data-i18n>{LNG_Print the application, submit documents to the school and check your results online}</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- เนื้อหาจาก datas/pages/dashboard_<ภาษา>.html (ไม่มี = เนื้อหาเริ่มต้นของโมดูล) -->
+      <section class="enroll-container enroll-section-block" data-if="data.content">
+        <div class="enroll-section-head">
+          <div>
+            <div class="enroll-eyebrow">Admission details</div>
+            <h2 data-i18n>{LNG_Admission details}</h2>
+            <p data-i18n>{LNG_Please read before applying}</p>
+          </div>
+        </div>
+        <article class="enroll-card enroll-page-content" data-html="data.content"></article>
+      </section>
+
+      <section class="enroll-container">
+        <div class="enroll-banner">
+          <div>
+            <h3 data-i18n>{LNG_Already applied?}</h3>
+            <p data-i18n>{LNG_Check results, edit or print your application with the ID number and date of birth you applied with}</p>
+          </div>
+          <a class="enroll-btn enroll-btn-yellow" href="enroll-result" data-route="/enroll-result"><span data-i18n>{LNG_Check application results}</span> <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="enroll-site-footer">
+      <div class="enroll-container">
+        <span>&copy; <span data-text="data.school_name"></span> · <span data-i18n>{LNG_Online admissions}</span></span>
+        <a href="enroll-privacy" data-route="/enroll-privacy" data-i18n>{LNG_Privacy Policy}</a>
+      </div>
+    </footer>
+  </div>
+</div>
