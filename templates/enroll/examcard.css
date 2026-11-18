@@ -1,0 +1,122 @@
+/**
+ * บัตรประจำตัวผู้สอบ — โหลดต่อจาก templates/enroll/print.css
+ * บัตรอยู่ครึ่งบนของ A4 มีกรอบเส้นประไว้ตัด
+ */
+.ec-page {
+  gap: 0;
+}
+
+.ec-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+  height: 132mm;
+  padding: 6mm 7mm;
+  border: 0.4mm dashed #64748b;
+  border-radius: 3mm;
+  box-sizing: border-box;
+}
+
+.ec-head {
+  display: flex;
+  align-items: center;
+  gap: 4mm;
+  padding-bottom: 2.5mm;
+  border-bottom: 0.6mm solid var(--es-accent);
+}
+
+.ec-head .logo {
+  width: 16mm;
+  height: 16mm;
+  object-fit: contain;
+}
+
+.ec-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.ec-title h1 {
+  font-size: 14pt;
+  color: var(--es-accent);
+}
+
+.ec-doc {
+  font-size: 13pt;
+  font-weight: 700;
+}
+
+.ec-year {
+  color: var(--es-muted);
+}
+
+.ec-no {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5mm 3mm;
+  border-radius: 1.5mm;
+  background: var(--es-accent-soft);
+}
+
+.ec-no small {
+  font-size: 8.5pt;
+  color: var(--es-muted);
+}
+
+.ec-no b {
+  font-size: 16pt;
+  letter-spacing: 0.5mm;
+}
+
+.ec-no img {
+  height: 9mm;
+  max-width: none;
+}
+
+.ec-body {
+  display: flex;
+  gap: 6mm;
+  align-items: flex-start;
+}
+
+.ec-photo {
+  width: 30mm;
+  height: 40mm;
+}
+
+.ec-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+  min-width: 0;
+}
+
+.ec-info .field b {
+  width: 26mm;
+}
+
+.ec-note {
+  flex: 1;
+  padding: 2mm 3mm;
+  border-radius: 1.5mm;
+  background: #fff7ed;
+  border-left: 1mm solid #f59e0b;
+  font-size: 9.5pt;
+  overflow: hidden;
+}
+
+.ec-note p {
+  margin-top: 0.5mm !important;
+}
+
+.ec-sign {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.ec-sign .line {
+  min-width: 36mm;
+}

@@ -1,0 +1,1923 @@
+/**
+ * modules/enroll/styles.css
+ * สไตล์เฉพาะของโมดูลรับสมัครนักเรียน
+ *
+ * หน้าผู้สมัคร (หน้าแรก / สมัคร / ผล / ประกาศผล / ความเป็นส่วนตัว) เป็นหน้าเว็บของโรงเรียน
+ * โทนสีกรมท่า-เขียว-ครีม กำหนดเป็นตัวแปร --en-* ที่ .enroll-public (มีชุดโหมดมืด)
+ * ช่องกรอก/ปุ่มของ framework ในหน้าเหล่านี้ใช้สีชุดเดียวกันผ่าน --color-primary, --input-bg
+ */
+
+/* ========================================
+   ตัวแปรสี
+   ======================================== */
+.enroll-public {
+  --en-navy: #173c51;
+  --en-navy-dark: #102e40;
+  --en-heading: #173c51;
+  --en-green: #276753;
+  --en-green-soft: #e8efe7;
+  --en-cream: #faf8f3;
+  --en-yellow: #f4ce75;
+  --en-text: #203845;
+  --en-muted: #74828a;
+  --en-line: #e5e9e7;
+  --en-surface: #ffffff;
+  --en-surface-alt: #f7f9f8;
+  --en-input: #fafcfb;
+  --en-input-line: #dce3e0;
+  --en-cover-1: #eee9da;
+  --en-cover-2: #e1ece5;
+  --en-cover-3: #e2e9f0;
+  --en-visual: #e4ece5;
+  --en-hill: #c2d5bd;
+  --en-building: #faf8ee;
+  --en-danger: #b4232a;
+  --en-danger-soft: #fbe9e9;
+  --en-radius: 24px;
+  --en-radius-md: 16px;
+  --en-radius-sm: 12px;
+  --en-shadow: 0 16px 40px rgba(23, 60, 81, 0.06);
+
+  /* ช่องกรอกและปุ่มของ framework ในหน้าผู้สมัคร */
+  --color-primary: var(--en-navy);
+  --color-primary-hover: var(--en-navy-dark);
+  --color-primary-dark: var(--en-navy-dark);
+  --highlight-bg: var(--en-green);
+  --color-border: var(--en-input-line);
+  --input-bg: var(--en-input);
+  --field-border-radius: 10px;
+  --button-border-radius: var(--en-radius-sm);
+
+  min-height: 100vh;
+  background: var(--en-cream);
+  color: var(--en-text);
+  line-height: 1.65;
+}
+
+[data-theme=dark] .enroll-public {
+  --en-navy: #2f6a87;
+  --en-navy-dark: #255872;
+  --en-heading: #d5e6ee;
+  --en-green: #7cc4a6;
+  --en-green-soft: #1d3a31;
+  --en-cream: #0f1a20;
+  --en-yellow: #e9c066;
+  --en-text: #dce7ec;
+  --en-muted: #93a6ae;
+  --en-line: #233944;
+  --en-surface: #15252e;
+  --en-surface-alt: #1a2d37;
+  --en-input: #11212a;
+  --en-input-line: #2b4652;
+  --en-cover-1: #2a2a22;
+  --en-cover-2: #1e2f28;
+  --en-cover-3: #1e2a34;
+  --en-visual: #1a2e2a;
+  --en-hill: #24423a;
+  --en-building: #e9e6d8;
+  --en-danger: #f08a8f;
+  --en-danger-soft: #3a1d20;
+  --en-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.enroll-public [hidden] {
+  display: none !important;
+}
+
+.enroll-public a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.enroll-public a:focus-visible,
+.enroll-public button:focus-visible {
+  outline: 3px solid #d39c2e;
+  outline-offset: 3px;
+}
+
+.enroll-container {
+  width: min(1160px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.enroll-eyebrow {
+  color: var(--en-green);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   ปุ่ม
+   ======================================== */
+.enroll-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.9rem;
+  padding: 0.7rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--en-radius-sm);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.enroll-btn:hover {
+  transform: translateY(-2px);
+}
+
+.enroll-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
+.enroll-btn[class*=" icon-"]::before {
+  margin: 0;
+}
+
+.enroll-public .enroll-btn-primary {
+  background: var(--en-navy);
+  color: #fff;
+}
+
+.enroll-public .enroll-btn-primary:hover {
+  background: var(--en-navy-dark);
+}
+
+.enroll-public .enroll-btn-light {
+  background: var(--en-surface);
+  border-color: var(--en-line);
+  color: var(--en-heading);
+}
+
+.enroll-public .enroll-btn-light:hover {
+  border-color: var(--en-green);
+}
+
+.enroll-public .enroll-btn-yellow {
+  background: var(--en-yellow);
+  color: #173c51;
+}
+
+.enroll-public .enroll-btn-muted {
+  background: var(--en-surface-alt);
+  border-color: var(--en-line);
+  color: var(--en-muted);
+  cursor: default;
+}
+
+.enroll-public .enroll-btn-muted:hover {
+  transform: none;
+}
+
+.enroll-btn-block {
+  width: 100%;
+}
+
+/* ========================================
+   หัวเว็บ
+   ======================================== */
+.enroll-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--en-cream) 96%, transparent);
+  border-bottom: 1px solid var(--en-line);
+  backdrop-filter: blur(8px);
+}
+
+.enroll-site-nav {
+  min-height: 5.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.enroll-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.enroll-brand-logo {
+  flex-shrink: 0;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: var(--en-radius-sm);
+  object-fit: contain;
+}
+
+.enroll-brand-mark {
+  display: grid;
+  place-items: center;
+  background: var(--en-navy);
+  color: var(--en-yellow);
+  font-size: 1.4rem;
+  border-radius: 12px 12px 20px 20px;
+}
+
+.enroll-brand-mark::before {
+  margin: 0;
+}
+
+.enroll-brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.enroll-brand-text strong {
+  font-size: 1.125rem;
+  color: var(--en-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.enroll-brand-text small {
+  color: var(--en-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.enroll-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+  font-size: 0.9rem;
+}
+
+.enroll-menu > a:not(.enroll-btn) {
+  position: relative;
+  padding: 0.35rem 0;
+  white-space: nowrap;
+}
+
+.enroll-menu > a:not(.enroll-btn):hover,
+.enroll-menu > a.active:not(.enroll-btn) {
+  color: var(--en-green);
+}
+
+.enroll-menu > a.active:not(.enroll-btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--en-green);
+}
+
+.enroll-menu .enroll-menu-staff {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  color: var(--en-muted);
+  font-size: 0.85rem;
+}
+
+.enroll-menu-apply {
+  flex-shrink: 0;
+  min-height: 2.6rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.enroll-public .enroll-lang {
+  min-height: 2.25rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--en-line);
+  border-radius: 999px;
+  background: var(--en-surface);
+  color: var(--en-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.enroll-public .enroll-lang ul a {
+  padding: 0.4em 1em;
+}
+
+/* ========================================
+   หน้าแรก
+   ======================================== */
+.enroll-landing {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  padding: 4rem 0 3.25rem;
+}
+
+.enroll-pill {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--en-green-soft);
+  color: var(--en-green);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.enroll-pill.is-closed {
+  background: var(--en-danger-soft);
+  color: var(--en-danger);
+}
+
+.enroll-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.enroll-landing h1 {
+  margin: 1.4rem 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  line-height: 1.3;
+  letter-spacing: -1px;
+  color: var(--en-heading);
+}
+
+.enroll-landing h1 em {
+  font-style: normal;
+  color: var(--en-green);
+}
+
+.enroll-lead {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--en-muted);
+  font-size: 1rem;
+}
+
+.enroll-landing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.75rem 0;
+}
+
+.enroll-landing-closed {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: 1.75rem 0;
+}
+
+.enroll-notice-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: var(--en-radius-sm);
+  background: var(--en-danger-soft);
+  color: var(--en-danger);
+  font-weight: 600;
+}
+
+.enroll-landing-note {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--en-muted);
+  font-size: 0.85rem;
+}
+
+.enroll-landing-note b {
+  color: var(--en-green);
+}
+
+/* ---- ภาพอาคารเรียน (CSS ล้วน) ---- */
+.enroll-visual {
+  position: relative;
+  min-height: 23.75rem;
+  overflow: hidden;
+  border-radius: 110px var(--en-radius) var(--en-radius) var(--en-radius);
+  background: var(--en-visual);
+}
+
+.enroll-visual::before {
+  content: "";
+  position: absolute;
+  top: 2.1rem;
+  right: 2.5rem;
+  width: 11.9rem;
+  height: 11.9rem;
+  border-radius: 50%;
+  background: var(--en-yellow);
+}
+
+.enroll-visual::after {
+  content: "";
+  position: absolute;
+  left: -5rem;
+  bottom: -4.25rem;
+  width: 40.6rem;
+  height: 10rem;
+  border-radius: 50%;
+  background: var(--en-hill);
+}
+
+.enroll-visual-label {
+  position: absolute;
+  top: 2.4rem;
+  left: 2.1rem;
+  color: var(--en-green);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+}
+
+.enroll-school {
+  position: absolute;
+  z-index: 1;
+  bottom: 4.7rem;
+  left: 14%;
+  width: 72%;
+  height: 10rem;
+  background: var(--en-building);
+  border-bottom: 12px solid #d5d8c6;
+  box-shadow: 10px 12px 0 #284a4320;
+}
+
+.enroll-school-roof {
+  position: absolute;
+  top: -17px;
+  left: -5%;
+  width: 110%;
+  height: 18px;
+  background: #173c51;
+}
+
+.enroll-school-center {
+  position: absolute;
+  top: -45px;
+  left: 34%;
+  width: 32%;
+  height: 193px;
+  background: #fffef7;
+  border-top: 8px solid #173c51;
+}
+
+.enroll-school-clock {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  margin: 17px auto;
+  border: 3px solid #173c51;
+  border-radius: 50%;
+}
+
+.enroll-school-clock::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 13px;
+  width: 2px;
+  height: 10px;
+  background: #173c51;
+}
+
+.enroll-school-clock::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  width: 8px;
+  height: 2px;
+  background: #173c51;
+}
+
+.enroll-school-door {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 40%;
+  height: 65px;
+  border-radius: 22px 22px 0 0;
+  background: #173c51;
+}
+
+.enroll-school-windows {
+  position: absolute;
+  top: 25px;
+  left: 7%;
+  display: grid;
+  grid-template-columns: repeat(2, 20px);
+  gap: 18px;
+}
+
+.enroll-school-windows.is-right {
+  left: auto;
+  right: 7%;
+}
+
+.enroll-school-windows i {
+  width: 20px;
+  height: 28px;
+  background: #95b9b6;
+  border-bottom: 4px solid #d3e1da;
+}
+
+.enroll-visual-card {
+  position: absolute;
+  z-index: 2;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--en-radius-md);
+  background: color-mix(in srgb, var(--en-surface) 93%, transparent);
+}
+
+.enroll-visual-card strong {
+  display: block;
+  color: var(--en-heading);
+  font-size: 0.9rem;
+}
+
+.enroll-visual-card small {
+  color: var(--en-muted);
+  font-size: 0.75rem;
+}
+
+.enroll-visual-badge {
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--en-green-soft);
+  color: var(--en-green);
+  object-fit: contain;
+}
+
+/* ---- แถบตัวเลข ---- */
+.enroll-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 4rem;
+  padding: 1.5rem 0;
+  border: 1px solid var(--en-line);
+  border-radius: 18px;
+  background: var(--en-surface);
+}
+
+.enroll-stat {
+  padding: 0 0.75rem;
+  text-align: center;
+}
+
+.enroll-stat + .enroll-stat {
+  border-left: 1px solid var(--en-line);
+}
+
+.enroll-stat strong {
+  display: block;
+  color: var(--en-heading);
+  font-size: 1.65rem;
+}
+
+.enroll-stat span {
+  color: var(--en-muted);
+  font-size: 0.8rem;
+}
+
+/* ---- หัวข้อของแต่ละส่วน ---- */
+.enroll-section-block {
+  margin-bottom: 4rem;
+  scroll-margin-top: 6.5rem;
+}
+
+.enroll-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.enroll-section-head h2 {
+  margin: 0.5rem 0 0.25rem;
+  color: var(--en-heading);
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+}
+
+.enroll-section-head p {
+  margin: 0;
+  color: var(--en-muted);
+  font-size: 0.9rem;
+}
+
+.enroll-chip {
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--en-line);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* ---- การ์ดระดับชั้น ---- */
+.enroll-level-cards {
+  display: grid;
+  /* auto-fit: มี 2-3 ระดับชั้นก็เต็มแถว */
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+}
+
+.enroll-level-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--en-line);
+  border-radius: var(--en-radius);
+  background: var(--en-surface);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.enroll-level-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--en-shadow);
+}
+
+.enroll-level-cover {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 9.4rem;
+  padding: 1.5rem;
+  background: var(--en-cover-1);
+  color: var(--en-heading);
+}
+
+.enroll-level-card:nth-of-type(3n+2) .enroll-level-cover {
+  background: var(--en-cover-2);
+}
+
+.enroll-level-card:nth-of-type(3n) .enroll-level-cover {
+  background: var(--en-cover-3);
+}
+
+.enroll-level-cover small {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  opacity: 0.6;
+}
+
+.enroll-grade {
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -2px;
+}
+
+.enroll-level-symbol {
+  flex-shrink: 0;
+  width: 4.25rem;
+  height: 4.25rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--en-heading) 14%, transparent);
+  border-radius: 50%;
+  color: var(--en-green);
+  font-size: 1.75rem;
+}
+
+.enroll-level-card:nth-of-type(3n+1) .enroll-level-symbol::before {
+  content: "✿";
+}
+
+.enroll-level-card:nth-of-type(3n+2) .enroll-level-symbol::before {
+  content: "✧";
+}
+
+.enroll-level-card:nth-of-type(3n) .enroll-level-symbol::before {
+  content: "↗";
+}
+
+.enroll-level-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.4rem;
+}
+
+.enroll-level-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.enroll-level-head h3 {
+  flex: 1;
+  margin: 0;
+  color: var(--en-heading);
+  font-size: 1.125rem;
+}
+
+.enroll-level-card.is-full .enroll-level-cover {
+  opacity: 0.6;
+}
+
+.enroll-plan-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.enroll-plan-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--en-line);
+}
+
+.enroll-plan-list li:last-child {
+  border-bottom: 0;
+}
+
+.enroll-plan-list li > span {
+  flex: 1;
+}
+
+.enroll-plan-list li small {
+  color: var(--en-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.enroll-plan-list li.is-full > span {
+  color: var(--en-muted);
+  text-decoration: line-through;
+}
+
+.enroll-plan-full {
+  flex-shrink: 0;
+  padding: 0.05em 0.6em;
+  border-radius: 999px;
+  background: var(--en-danger-soft);
+  color: var(--en-danger);
+  font-size: 0.75rem;
+}
+
+.enroll-level-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 0 0.25rem;
+  border-top: 1px solid var(--en-line);
+  font-size: 0.8rem;
+}
+
+.enroll-level-info strong {
+  color: var(--en-green);
+}
+
+.enroll-levels-note {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 1rem 0 0;
+  color: var(--en-muted);
+  font-size: 0.8rem;
+}
+
+/* ---- ขั้นตอน ---- */
+.enroll-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.enroll-step-number {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--en-green) 35%, var(--en-line));
+  border-radius: 50%;
+  color: var(--en-green);
+  font-size: 0.8rem;
+}
+
+.enroll-steps h3 {
+  margin: 1rem 0 0.35rem;
+  color: var(--en-heading);
+  font-size: 1rem;
+}
+
+.enroll-steps p {
+  margin: 0;
+  color: var(--en-muted);
+  font-size: 0.85rem;
+}
+
+/* ---- แบนเนอร์ ---- */
+.enroll-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 1.9rem 2.1rem;
+  border-radius: var(--en-radius);
+  background: #173c51;
+  color: #fff;
+}
+
+.enroll-banner h3 {
+  margin: 0 0 0.35rem;
+  color: #fff;
+}
+
+.enroll-banner p {
+  margin: 0;
+  color: #bed0d6;
+  font-size: 0.85rem;
+}
+
+/* ---- ท้ายเว็บ ---- */
+.enroll-site-footer {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--en-line);
+  color: var(--en-muted);
+  font-size: 0.8rem;
+}
+
+.enroll-site-footer .enroll-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.enroll-site-footer a:hover {
+  color: var(--en-green);
+}
+
+/* ========================================
+   หน้าย่อย (สมัคร / ผล / ประกาศผล / ความเป็นส่วนตัว)
+   ======================================== */
+.enroll-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2.5rem 0 3.5rem;
+}
+
+.enroll-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem 1.5rem;
+}
+
+.enroll-page-head h1 {
+  margin: 0.35rem 0 0.5rem;
+  color: var(--en-heading);
+  font-size: clamp(1.75rem, 3.4vw, 2.4rem);
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+}
+
+.enroll-page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--en-muted);
+  font-size: 0.875rem;
+}
+
+.enroll-page-meta b {
+  color: var(--en-text);
+}
+
+.enroll-page-actions,
+.enroll-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* ฟอร์ม/การ์ดทั่วไปของหน้าย่อย */
+.enroll-form {
+  margin: 0;
+}
+
+.enroll-public .enroll-form fieldset {
+  margin: 0;
+}
+
+.enroll-card {
+  padding: 1.75rem;
+  border: 1px solid var(--en-line);
+  border-radius: var(--en-radius);
+  background: var(--en-surface);
+}
+
+.enroll-public fieldset.enroll-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.enroll-public fieldset.enroll-card > legend {
+  float: left;
+  width: 100%;
+  margin: 0 0 0.25rem;
+  padding: 0;
+  color: var(--en-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.enroll-notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.75rem 1.75rem;
+  text-align: center;
+}
+
+.enroll-notice-icon {
+  width: 4.4rem;
+  height: 4.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--en-green-soft);
+  color: var(--en-green);
+  font-size: 1.9rem;
+}
+
+.enroll-notice-icon::before {
+  margin: 0;
+}
+
+.enroll-notice h2 {
+  margin: 0;
+  color: var(--en-heading);
+  font-size: 1.3rem;
+}
+
+.enroll-notice .enroll-actions {
+  justify-content: center;
+}
+
+.enroll-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--en-yellow) 18%, var(--en-surface));
+  color: var(--en-text);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.enroll-callout::before {
+  margin: 0.15em 0 0;
+  color: #b07d1a;
+}
+
+/* ---- เนื้อหาที่ผู้ดูแลเขียน (หน้าแรก / ผลการสมัคร / ความเป็นส่วนตัว) ---- */
+.enroll-page-content {
+  line-height: 1.75;
+}
+
+.enroll-page-content > :first-child {
+  margin-top: 0;
+}
+
+.enroll-page-content > :last-child {
+  margin-bottom: 0;
+}
+
+.enroll-page-content h1,
+.enroll-page-content h2,
+.enroll-page-content h3 {
+  margin: 1.5rem 0 0.5rem;
+  line-height: 1.35;
+  color: var(--en-heading);
+}
+
+.enroll-page-content h2 {
+  font-size: 1.25rem;
+}
+
+.enroll-page-content h3 {
+  font-size: 1.1rem;
+}
+
+.enroll-page-content ol,
+.enroll-page-content ul {
+  margin: 0 0 1rem;
+  padding-left: 1.5em;
+}
+
+.enroll-page-content li {
+  margin: 0.25rem 0;
+}
+
+.enroll-page-content a {
+  color: var(--en-green);
+  text-decoration: underline;
+}
+
+.enroll-page-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--en-radius-sm);
+}
+
+.enroll-page-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.enroll-page-content td,
+.enroll-page-content th {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--en-line);
+}
+
+/* ========================================
+   ช่องกรอก
+   ======================================== */
+.enroll-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.enroll-grid:empty {
+  display: none;
+}
+
+.enroll-contents {
+  display: contents;
+}
+
+.enroll-grid-name {
+  grid-template-columns: minmax(8rem, 1fr) minmax(0, 3fr);
+}
+
+.enroll-grid-parent {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+}
+
+.enroll-public label {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  color: var(--en-text);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ช่องบังคับ: ช่องที่มี required หรือป้ายที่ JS ทำเครื่องหมายไว้ (รูปนักเรียน) */
+.enroll-public label:has(+ .form-control [required])::after,
+.enroll-public label.required::after {
+  content: " *";
+  color: var(--en-danger);
+}
+
+.enroll-public .form-control {
+  background-color: var(--en-input);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.enroll-public .form-control:focus-within {
+  border-color: var(--en-green);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--en-green) 22%, transparent);
+}
+
+.enroll-public .comment {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+}
+
+.enroll-required-note {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0;
+  color: var(--en-muted);
+  font-size: 0.8rem;
+}
+
+/* ---- ข้อมูลผู้สมัคร: กรอบรูปซ้าย ช่องกรอกขวา ---- */
+.enroll-student {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.enroll-student-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* ช่องเลือกไฟล์กับพรีวิวอยู่ในเซลล์เดียวกันของกริด พรีวิวจึงทับกรอบรูปพอดี */
+.enroll-photo {
+  display: grid;
+  grid-template-areas: "label" "drop" "hint";
+  gap: 0.5rem;
+}
+
+.enroll-photo > label {
+  grid-area: label;
+  margin: 0;
+}
+
+.enroll-photo > .form-control {
+  grid-area: drop;
+  aspect-ratio: 3 / 4;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px dashed color-mix(in srgb, var(--en-green) 40%, var(--en-input-line));
+  border-radius: var(--en-radius-md);
+  background: var(--en-green-soft);
+  cursor: pointer;
+}
+
+.enroll-photo > .form-control:hover {
+  border-color: var(--en-green);
+}
+
+.enroll-photo > .form-control[class*=" icon-"]::before {
+  width: auto;
+  margin: 0;
+  background: none;
+  color: var(--en-green);
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.enroll-photo .file-display {
+  flex: 0 0 auto;
+  height: auto;
+  padding: 0 0.5rem;
+  color: var(--en-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.enroll-photo > .comment {
+  grid-area: hint;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.enroll-photo > .file-preview {
+  grid-area: drop;
+  z-index: 1;
+  display: block;
+  margin: 0;
+  /* คลิกทะลุไปที่ช่องเลือกไฟล์ด้านล่าง ยกเว้นปุ่มลบ */
+  pointer-events: none;
+}
+
+.enroll-photo > .file-preview:empty {
+  display: none;
+}
+
+.enroll-photo .preview-item {
+  height: 100%;
+  border-radius: var(--en-radius-md);
+  background: var(--en-surface);
+  box-shadow: inset 0 0 0 1px var(--en-line);
+}
+
+/* รูปเดิม + รูปที่เพิ่งเลือก = แสดงเฉพาะรูปล่าสุด */
+.enroll-photo .preview-item:not(:last-child) {
+  display: none;
+}
+
+.enroll-photo .preview-item .image-preview {
+  height: 100%;
+  background-size: cover;
+  background-position: center top;
+}
+
+.enroll-photo .preview-item .file-info {
+  display: none;
+}
+
+.enroll-photo .preview-item .icon-delete {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* ---- ผู้ปกครอง ---- */
+.enroll-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.enroll-subhead {
+  margin: 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--en-line);
+  color: var(--en-heading);
+  font-size: 1rem;
+}
+
+.enroll-parents {
+  display: grid;
+  gap: 1rem;
+}
+
+.enroll-parent {
+  padding: 1rem;
+  border: 1px solid var(--en-line);
+  border-radius: var(--en-radius-md);
+  background: var(--en-surface-alt);
+}
+
+.enroll-parent-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-bottom: 0.75rem;
+  color: var(--en-green);
+  font-weight: 700;
+}
+
+.enroll-parent > .comment {
+  margin-top: 0.5rem;
+}
+
+/* ---- ยินยอม PDPA / รับรองข้อมูล ---- */
+.enroll-consent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--en-line);
+  border-radius: var(--en-radius-md);
+  background: var(--en-surface-alt);
+}
+
+.enroll-consent-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.enroll-consent-check input {
+  flex-shrink: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.2em;
+  accent-color: var(--en-green);
+}
+
+.enroll-consent-check label {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.enroll-consent-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-left: calc(1.2rem + 0.75rem);
+  color: var(--en-green);
+  font-size: 0.85rem;
+}
+
+.enroll-certify {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0;
+  color: var(--en-green);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* ========================================
+   ฟอร์มสมัครแบบทีละขั้น
+   ======================================== */
+.enroll-wizard {
+  /* เลื่อนกลับมาที่ต้นฟอร์มตอนเปลี่ยนขั้น โดยไม่ถูกหัวเว็บที่ติดด้านบนบัง */
+  scroll-margin-top: 6.5rem;
+  overflow: hidden;
+  border: 1px solid var(--en-line);
+  border-radius: var(--en-radius);
+  background: var(--en-surface);
+  box-shadow: var(--en-shadow);
+}
+
+.enroll-wizard-steps {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 1.4rem 1.75rem 0;
+  list-style: none;
+}
+
+.enroll-wizard-steps li {
+  flex: 1;
+  min-width: 0;
+}
+
+.enroll-wizard-steps button {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0 0 0.65rem;
+  border: 0;
+  border-bottom: 3px solid var(--en-line);
+  border-radius: 0;
+  background: none;
+  color: var(--en-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.enroll-wizard-steps button b {
+  font-variant-numeric: tabular-nums;
+}
+
+.enroll-wizard-steps button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.enroll-wizard-steps button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.enroll-wizard-steps button.is-done {
+  border-color: color-mix(in srgb, var(--en-green) 45%, var(--en-line));
+  color: var(--en-green);
+}
+
+.enroll-wizard-steps button.is-active {
+  border-color: var(--en-green);
+  color: var(--en-green);
+  font-weight: 700;
+}
+
+.enroll-wizard-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.6rem 1.75rem;
+}
+
+.enroll-public .enroll-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.enroll-public .enroll-step > legend {
+  float: left;
+  width: 100%;
+  margin: 0 0 0.25rem;
+  padding: 0;
+  color: var(--en-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.enroll-wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.1rem 1.75rem;
+  border-top: 1px solid var(--en-line);
+  background: var(--en-surface-alt);
+}
+
+.enroll-wizard-actions [data-role="next"],
+.enroll-wizard-actions [data-role="submit"] {
+  margin-left: auto;
+}
+
+/* ---- สรุปข้อมูลก่อนส่ง ---- */
+.enroll-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.enroll-summary-group {
+  overflow: hidden;
+  border: 1px solid var(--en-line);
+  border-radius: var(--en-radius-md);
+}
+
+.enroll-summary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: var(--en-surface-alt);
+  color: var(--en-heading);
+  font-weight: 700;
+}
+
+.enroll-summary-head button {
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--en-line);
+  border-radius: 8px;
+  background: var(--en-surface);
+  color: var(--en-green);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.enroll-summary dl {
+  margin: 0;
+  padding: 0 1rem;
+}
+
+.enroll-summary dl > div {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--en-line);
+  font-size: 0.875rem;
+}
+
+.enroll-summary dl > div:last-child {
+  border-bottom: 0;
+}
+
+.enroll-summary dt {
+  color: var(--en-muted);
+}
+
+.enroll-summary dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.enroll-summary dd.is-empty {
+  color: var(--en-muted);
+}
+
+/* ---- ช่องดักบอต: อยู่นอกจอ ไม่ใช้ display:none เพราะบอตบางตัวข้ามช่องที่ซ่อนแบบนั้น ---- */
+.enroll-hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ========================================
+   หน้าผลการสมัคร
+   ======================================== */
+.enroll-result-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.enroll-result-photo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 9rem;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--en-radius-md);
+  background: var(--en-green-soft);
+  box-shadow: inset 0 0 0 1px var(--en-line);
+}
+
+.enroll-result-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.enroll-result-photo span {
+  color: var(--en-green);
+  font-size: 3rem;
+}
+
+.enroll-result-detail {
+  flex: 1 1 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.enroll-result-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.enroll-result-head h2 {
+  margin: 0 0 0.5rem;
+  color: var(--en-heading);
+  font-size: 1.5rem;
+}
+
+.enroll-barcode {
+  max-width: none;
+  height: 2.5em;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.enroll-result-detail dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+  padding: 1rem;
+  border-radius: var(--en-radius-md);
+  background: var(--en-surface-alt);
+}
+
+.enroll-result-detail dt {
+  color: var(--en-muted);
+}
+
+.enroll-result-detail dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.enroll-shared-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0;
+  color: var(--en-muted);
+  font-size: 0.85rem;
+}
+
+/* สถานะผลการสมัคร (term = เลขสถานะใน REGISTER_STATUS) — ใช้ทั้งหน้าผู้สมัครและประกาศผล */
+.enroll-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.2em 0.85em;
+  border-radius: var(--border-radius-full, 999px);
+  background: var(--color-warning-light);
+  color: var(--color-warning-hover);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+}
+
+.enroll-status::before {
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.enroll-status.term1 {
+  background: var(--color-success-light);
+  color: var(--color-success-hover);
+}
+
+.enroll-status.term2,
+.enroll-status.term3 {
+  background: var(--color-error-light);
+  color: var(--color-error-hover);
+}
+
+.enroll-status.term4,
+.enroll-status.term5,
+.enroll-status.term6,
+.enroll-status.term7 {
+  background: var(--color-info-light);
+  color: var(--color-info-hover);
+}
+
+/* ========================================
+   ประกาศผล
+   ======================================== */
+.enroll-announce {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.enroll-announce-filter .form-control .btn {
+  border-radius: 0 10px 10px 0;
+}
+
+.enroll-announce-table td,
+.enroll-announce-table th {
+  padding: 0.55rem 0.75rem;
+}
+
+.enroll-announce-empty {
+  margin: 0;
+  color: var(--en-muted);
+}
+
+/* ========================================
+   หน้าผู้ดูแล
+   ======================================== */
+/* ใบสมัครของเจ้าหน้าที่ (/enroll) อยู่ในเลย์เอาต์ของผู้ดูแล ไม่มีตัวแปร --en-* ของหน้าผู้สมัคร
+   ส่วนที่ใช้ร่วมกัน (ผู้ปกครอง กริดช่องกรอก) จึงชี้ตัวแปรไปที่สีของธีม */
+.enroll-admin {
+  --en-line: var(--color-border);
+  --en-surface: var(--color-surface);
+  --en-surface-alt: var(--color-surface-light);
+  --en-green: var(--color-primary);
+  --en-green-soft: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  --en-heading: var(--color-text);
+  --en-text: var(--color-text);
+  --en-muted: var(--color-text-muted);
+  --en-input-line: var(--color-border);
+  --en-danger: var(--color-error);
+  --en-danger-soft: var(--color-error-light);
+  --en-radius-md: var(--border-radius-lg);
+}
+
+.enroll-admin-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.enroll-admin-status .enroll-review {
+  margin-left: 0;
+}
+
+/* ป้าย "ต้องตรวจสอบ" ในตารางผู้สมัคร */
+.enroll-review {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  margin-left: 0.4em;
+  padding: 0.05em 0.6em;
+  border-radius: var(--border-radius-full);
+  background: var(--color-warning-light);
+  color: var(--color-warning-hover);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: help;
+}
+
+/* คอลัมน์เลขประจำตัวผู้สมัคร: บาร์โค้ดอยู่บน เลขที่อยู่ล่าง */
+.enroll-barcode-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.enroll-barcode-cell img {
+  max-width: none;
+  height: 2.2em;
+}
+
+/* ========================================
+   จอเล็ก
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .enroll-public * {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 64em) {
+  .enroll-menu {
+    gap: 1rem;
+  }
+
+  /* เหลือแค่ไอคอน */
+  .enroll-menu .enroll-menu-staff {
+    font-size: 0;
+  }
+
+  .enroll-menu .enroll-menu-staff::before {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 53em) {
+  /* เมนูขึ้นแถวใหม่ใต้ชื่อโรงเรียน เลื่อนซ้าย-ขวาได้ */
+  .enroll-site-nav {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    min-height: 0;
+    padding: 0.75rem 0 0;
+  }
+
+  /* แถวบน: ชื่อโรงเรียน + ปุ่มสมัคร / แถวล่าง: เมนู */
+  .enroll-menu {
+    order: 3;
+    width: 100%;
+    gap: 1.1rem;
+    margin-left: 0;
+    padding-bottom: 0.65rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .enroll-brand {
+    flex: 1;
+  }
+
+  .enroll-landing {
+    gap: 1.75rem;
+  }
+
+  .enroll-visual {
+    min-height: 20.6rem;
+  }
+
+  .enroll-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* ขั้นตอนของฟอร์ม: เห็นชื่อเฉพาะขั้นปัจจุบัน ขั้นอื่นเหลือแค่เลข */
+  .enroll-wizard-steps button span {
+    display: none;
+  }
+
+  .enroll-wizard-steps button.is-active span {
+    display: inline;
+  }
+
+  .enroll-wizard-steps li:has(.is-active) {
+    flex: 3;
+  }
+}
+
+@media (max-width: 40em) {
+  .enroll-brand-text strong {
+    font-size: 1rem;
+  }
+
+  .enroll-landing {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 2.25rem;
+  }
+
+  .enroll-landing h1 {
+    font-size: 2.1rem;
+  }
+
+  .enroll-visual {
+    min-height: 20rem;
+  }
+
+  /* จอแคบ ตัวอาคารกว้างจนบังป้าย */
+  .enroll-visual-label {
+    display: none;
+  }
+
+  .enroll-stats {
+    margin-bottom: 2.6rem;
+  }
+
+  .enroll-stat strong {
+    font-size: 1.4rem;
+  }
+
+  .enroll-stat span {
+    font-size: 0.7rem;
+  }
+
+  .enroll-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .enroll-level-cover {
+    height: 7.8rem;
+  }
+
+  .enroll-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+
+  .enroll-card {
+    padding: 1.25rem;
+  }
+
+  .enroll-wizard-steps {
+    padding: 1.1rem 1.25rem 0;
+  }
+
+  .enroll-wizard-body,
+  .enroll-wizard-actions {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .enroll-grid,
+  .enroll-grid-parent {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .enroll-grid-name {
+    grid-template-columns: minmax(6.5rem, 1fr) minmax(0, 2fr);
+  }
+
+  .enroll-student {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .enroll-photo {
+    width: min(100%, 12rem);
+    margin: 0 auto;
+  }
+
+  .enroll-summary dl > div {
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+  }
+
+  .enroll-page-actions,
+  .enroll-page-actions .enroll-btn,
+  .enroll-actions .enroll-btn {
+    width: 100%;
+  }
+
+  .enroll-result-photo {
+    width: 7rem;
+  }
+
+  .enroll-result-detail dl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .enroll-result-detail dt:not(:first-child) {
+    margin-top: 0.5rem;
+  }
+}

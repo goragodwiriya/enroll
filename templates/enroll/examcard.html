@@ -1,0 +1,36 @@
+<div class="sheet enroll-sheet ec-page">
+  <!-- บัตรขนาดประมาณครึ่ง A4 พิมพ์บนกระดาษ A4 แล้วตัดตามเส้นประ -->
+  <div class="ec-card">
+    <header class="ec-head">
+      %LOGO%
+      <div class="ec-title">
+        <h1>%SCHOOL_NAME%</h1>
+        <p class="ec-doc">{LNG_Admission card}</p>
+        <p class="ec-year">{LNG_School year} <b>%YEAR%</b></p>
+      </div>
+      <div class="ec-no">
+        <small>{LNG_Applicant ID}</small>
+        <b>%ENROLL_NO%</b>
+        <img src="data:image/png;base64,%BARCODE%" alt="%ENROLL_NO%">
+      </div>
+    </header>
+    <div class="ec-body">
+      <div class="es-photo ec-photo"><span>{LNG_Picture of student}</span>%PICTURE%</div>
+      <div class="ec-info">
+        <div class="field"><b>{LNG_Name}</b><span>%NAME%</span></div>
+        <div class="field"><b>{LNG_Education level}</b><span>%LEVEL%</span></div>
+        <div class="field"><b>{LNG_Study plan}</b><span>%PLAN%</span></div>
+        <div class="field"><b>{LNG_Exam date}</b><span>%EXAM_DATE%</span></div>
+        <div class="field"><b>{LNG_Exam location}</b><span>%EXAM_PLACE%</span></div>
+      </div>
+    </div>
+    <div class="ec-note">
+      <b>{LNG_Exam instructions}</b>
+      <p>%EXAM_NOTE%</p>
+    </div>
+    <div class="ec-sign">
+      <p>{LNG_Signed} <span class="line"></span> {LNG_Applicant}</p>
+      <p>{LNG_Signed} <span class="line"></span> {LNG_Exam proctor}</p>
+    </div>
+  </div>
+</div>

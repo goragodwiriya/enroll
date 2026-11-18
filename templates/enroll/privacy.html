@@ -1,0 +1,55 @@
+<!-- ประกาศความเป็นส่วนตัว (PDPA) ที่ผู้สมัครยินยอมก่อนส่งใบสมัคร แก้ไขได้ที่รายละเอียดของหน้า -->
+<div class="enroll-public">
+  <div class="enroll-form" data-component="api" data-endpoint="api/enroll/home/privacy">
+
+    <!-- หัวเว็บของหน้าผู้สมัคร — markup เดียวกันใน home / register / result / announce / privacy
+         (TemplateManager ไม่มี include) แก้ที่หนึ่งต้องแก้ให้ตรงกันทุกไฟล์ -->
+    <header class="enroll-site-header">
+      <div class="enroll-container enroll-site-nav">
+        <a class="enroll-brand" href="./" data-route="/">
+          <img class="enroll-brand-logo" data-if="data.logo" data-attr="src:data.logo" alt="">
+          <span class="enroll-brand-logo enroll-brand-mark icon-elearning" data-if="!data.logo"></span>
+          <span class="enroll-brand-text">
+            <strong data-text="data.school_name"></strong>
+            <small><span data-i18n>{LNG_Admissions}</span> <span data-text="data.school_year"></span></small>
+          </span>
+        </a>
+        <nav class="enroll-menu">
+          <a href="./" data-route="/" data-i18n>{LNG_Home}</a>
+          <a href="enroll-result" data-route="/enroll-result" data-i18n>{LNG_Result} &amp; {LNG_Print}</a>
+          <a href="enroll-announce" data-route="/enroll-announce" data-if="data.is_announce" data-i18n>{LNG_Result announcement}</a>
+          <button type="button" class="lang-toggle btn dropdown enroll-lang" data-component="lang-toggle" data-locales="th,en" title="{LNG_Language}">
+            <span data-lang-label>TH</span>
+            <ul>
+              <li><a data-locale="th">TH</a></li>
+              <li><a data-locale="en">EN</a></li>
+            </ul>
+          </button>
+          <a class="enroll-menu-staff icon-signin" href="login" data-route="/login" data-i18n>{LNG_For staff}</a>
+        </nav>
+        <a class="enroll-btn enroll-btn-primary enroll-menu-apply" href="enroll-edit" data-route="/enroll-edit" data-if="data.is_open"><span data-i18n>{LNG_Apply now}</span> <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main class="enroll-container enroll-main">
+      <section class="enroll-page-head">
+        <div>
+          <div class="enroll-eyebrow">Privacy</div>
+          <h1 data-i18n>{LNG_Privacy Policy}</h1>
+          <ul class="enroll-page-meta">
+            <li><span data-i18n>{LNG_School year}</span> <b data-text="data.school_year"></b></li>
+          </ul>
+        </div>
+      </section>
+
+      <article class="enroll-card enroll-page-content" data-html="data.content"></article>
+    </main>
+
+    <footer class="enroll-site-footer">
+      <div class="enroll-container">
+        <span>&copy; <span data-text="data.school_name"></span> · <span data-i18n>{LNG_Online admissions}</span></span>
+        <a href="enroll-privacy" data-route="/enroll-privacy" data-i18n>{LNG_Privacy Policy}</a>
+      </div>
+    </footer>
+  </div>
+</div>
